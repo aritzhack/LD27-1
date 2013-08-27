@@ -1,5 +1,6 @@
 package aritzh.ld27;
 
+import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
 
 import javax.swing.JFrame;
@@ -12,29 +13,43 @@ import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 /**
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Game extends Canvas implements Runnable {
-
-    private final int WIDTH;
-    private final int HEIGHT;
     JFrame frame;
     private Thread thread;
     private Profiler profiler = new Profiler();
     private boolean running;
 
+    private BufferedImage image;
+    private int[] pixels;
+    Render render;
+    Keyboard keyboard;
+    Font font;
+    long timeInSeconds = 0;
+
     public Game(int width, int height, boolean applet) {
         Dimension size = new Dimension(width, height);
 
-        setSize(size);
-        setMaximumSize(size);
-        setPreferredSize(size);
-        this.WIDTH = width;
-        this.HEIGHT = height;
-        if(!applet) this.createWindow();
+        keyboard = new Keyboard();
+
+        this.setFont(font = new Font("Consola", Font.PLAIN, 32));
+        this.setSize(size);
+        this.setMaximumSize(size);
+        this.setPreferredSize(size);
+        this.addKeyListener(keyboard);
+        this.addFocusListener(keyboard);
+
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+        render = new Render(width, height);
+
+        if (!applet) this.createWindow();
     }
 
     public static void main(String[] args) {
@@ -91,7 +106,8 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run() {
 
-        long lastTime = System.nanoTime() - 1;
+
+        long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
 
         int frames = 0, updates = 0;
@@ -114,11 +130,10 @@ public class Game extends Canvas implements Runnable {
             frames++;
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.println(updates + "ups, " + frames + "fps");
-                System.out.println("UpdateTime: " + profiler.getSectionTime("update") + ", RenderTime: " + profiler.getSectionTime("render"));
-                System.out.println("Frame State: " + frame.getState());
+                System.out.println(updates + "ups, " + frames + "fps, UpdateTime: " + profiler.getSectionTime("update") + ", RenderTime: " + profiler.getSectionTime("render"));
                 updates = 0;
                 frames = 0;
+                timeInSeconds++;
             }
 
             profiler.endSection("MainLoop");
@@ -131,16 +146,28 @@ public class Game extends Canvas implements Runnable {
         profiler.endSection();
     }
 
-    private synchronized void render() {
+    private void render() {
+        if (!running) return;
         profiler.startSection("Render");
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
             createBufferStrategy(3);
         } else {
             Graphics g = bs.getDrawGraphics();
-            g.setColor(new Color(43, 43, 44));
-            g.fillRect(0, 0, getWidth(), getHeight());
-            g.setFont(new Font("Consola", Font.PLAIN, 16));
+            g.setFont(this.font);
+            render.clear(pixels);
+            render.render(pixels);
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+
+            render.drawStringAt(g, "Hoola!!!", 0, 0);
+
+
+            if (!keyboard.hasFocus()) {
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Consola", Font.PLAIN, 100));
+                render.drawStringCenteredAt(g, "Click to focus!!", getWidth() / 2, getHeight() / 2);
+            }
+
             g.dispose();
             bs.show();
         }

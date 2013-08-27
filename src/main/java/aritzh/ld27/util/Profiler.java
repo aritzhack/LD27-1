@@ -14,32 +14,34 @@ public class Profiler {
     Map<String, Long> elapsedTime = new HashMap<String, Long>();
     Stack<String> trace = new Stack<String>();
 
-    public synchronized void startSection(String section){
+    public synchronized void startSection(String section) {
         section = section.toLowerCase();
 
-        if(startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" was been started!");
+        if (startTime.containsKey(section))
+            throw new IllegalArgumentException("Section \"" + section + "\" was been started!");
 
         startTime.put(section, System.nanoTime());
         trace.push(section);
     }
 
-     public synchronized void endSection(String section){
-         section = section.toLowerCase();
-         if(!startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" hasn't been started!");
+    public synchronized void endSection(String section) {
+        section = section.toLowerCase();
+        if (!startTime.containsKey(section))
+            throw new IllegalArgumentException("Section \"" + section + "\" hasn't been started!");
 
-         long before = startTime.remove(section);
-         elapsedTime.put(section, System.nanoTime() - before);
+        long before = startTime.remove(section);
+        elapsedTime.put(section, System.nanoTime() - before);
 
     }
 
-    public synchronized void endSection(){
-        if(trace.empty()) throw new IllegalStateException("There are no open sections to close!");
+    public synchronized void endSection() {
+        if (trace.empty()) throw new IllegalStateException("There are no open sections to close!");
         this.endSection(trace.pop());
     }
 
-    public synchronized long getSectionTime(String section){
+    public synchronized long getSectionTime(String section) {
         section = section.toLowerCase();
-        if(!elapsedTime.containsKey(section)) return 0;
+        if (!elapsedTime.containsKey(section)) return 0;
         return elapsedTime.get(section);
     }
 }
