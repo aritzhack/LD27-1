@@ -14,16 +14,16 @@ public class Profiler {
     Map<String, Long> elapsedTime = new HashMap<String, Long>();
     Stack<String> trace = new Stack<String>();
 
-    public void startSection(String section){
+    public synchronized void startSection(String section){
         section = section.toLowerCase();
 
-        if(startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" was already started!");
+        if(startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" was been started!");
 
         startTime.put(section, System.nanoTime());
         trace.push(section);
     }
 
-     public void endSection(String section){
+     public synchronized void endSection(String section){
          section = section.toLowerCase();
          if(!startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" hasn't been started!");
 
@@ -32,14 +32,14 @@ public class Profiler {
 
     }
 
-    public void endSection(){
+    public synchronized void endSection(){
         if(trace.empty()) throw new IllegalStateException("There are no open sections to close!");
         this.endSection(trace.pop());
     }
 
-    public long getSectionTime(String section){
+    public synchronized long getSectionTime(String section){
         section = section.toLowerCase();
-        //if(!elapsedTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" hasn't been profiled!");
+        if(!elapsedTime.containsKey(section)) return 0;
         return elapsedTime.get(section);
     }
 }
