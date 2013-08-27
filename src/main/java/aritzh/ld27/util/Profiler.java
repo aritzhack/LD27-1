@@ -1,0 +1,45 @@
+package aritzh.ld27.util;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+/**
+ * @author Aritz Lopez
+ * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
+ */
+public class Profiler {
+
+    Map<String, Long> startTime = new HashMap<String, Long>();
+    Map<String, Long> elapsedTime = new HashMap<String, Long>();
+    Stack<String> trace = new Stack<String>();
+
+    public void startSection(String section){
+        section = section.toLowerCase();
+
+        if(startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" was already started!");
+
+        startTime.put(section, System.nanoTime());
+        trace.push(section);
+    }
+
+     public void endSection(String section){
+         section = section.toLowerCase();
+         if(!startTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" hasn't been started!");
+
+         long before = startTime.remove(section);
+         elapsedTime.put(section, System.nanoTime() - before);
+
+    }
+
+    public void endSection(){
+        if(trace.empty()) throw new IllegalStateException("There are no open sections to close!");
+        this.endSection(trace.pop());
+    }
+
+    public long getSectionTime(String section){
+        section = section.toLowerCase();
+        //if(!elapsedTime.containsKey(section)) throw new IllegalArgumentException("Section \"" + section + "\" hasn't been profiled!");
+        return elapsedTime.get(section);
+    }
+}
