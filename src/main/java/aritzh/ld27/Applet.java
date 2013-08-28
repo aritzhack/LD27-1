@@ -8,6 +8,9 @@ import java.awt.HeadlessException;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Applet extends java.applet.Applet {
+
+    Game game;
+
     /**
      * Constructs a new Applet.
      * <p/>
@@ -50,9 +53,9 @@ public class Applet extends java.applet.Applet {
     @Override
     public void init() {
         super.init();    //To change body of overridden methods use File | Settings | File Templates.
-        Game g = new Game(this.getWidth(), this.getHeight(), true);
-        this.add(g);
-        g.start();
+        this.game = new Game(this.getWidth(), this.getHeight(), true, 2);
+        this.add(game);
+        game.start();
     }
 
     /**
@@ -77,5 +80,6 @@ public class Applet extends java.applet.Applet {
     @Override
     public void stop() {
         super.stop();
+        game.stop();
     }
 }
