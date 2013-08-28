@@ -7,12 +7,7 @@ import aritzh.ld27.util.Profiler;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -31,8 +26,14 @@ public class Game extends Canvas implements Runnable {
     private boolean running;
     private final boolean applet;
 
-    private BufferedImage renderImage;
-    private final Render render;
+    private BufferedImage normalRenderImage;
+    private BufferedImage fullscreenRenderImage;
+    private final Render normalRender;
+    private final Render fullscreenRender;
+
+    private BufferedImage currRenderImage;
+    private Render currRender;
+
     private final Keyboard keyboard;
     private long timeInSeconds = 0;
     private Dimension size;
@@ -61,8 +62,11 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(keyboard);
         this.addFocusListener(keyboard);
 
-        renderImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        render = new Render(width, height, ((DataBufferInt) renderImage.getRaster().getDataBuffer()).getData());
+        currRenderImage = normalRenderImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        currRender = normalRender = new Render(width, height, ((DataBufferInt) normalRenderImage.getRaster().getDataBuffer()).getData(), scale);
+
+        fullscreenRenderImage = new BufferedImage(width*scale, height*scale, BufferedImage.TYPE_INT_ARGB);
+        fullscreenRender = new Render(width*scale, height*scale, ((DataBufferInt) fullscreenRenderImage.getRaster().getDataBuffer()).getData(), scale);
 
         isFullscreenSupported = !applet && GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().isFullScreenSupported();
         
@@ -70,10 +74,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        //---------------------------------------
-        //-- TODO Disable scaling in fullscreen--
-        //---------------------------------------
-        Game g = new Game(400, 300, false, 2);
+        Game g = new Game(400, 225, false, 2);
         g.start();
     }
 
@@ -175,20 +176,27 @@ public class Game extends Canvas implements Runnable {
         }
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
-            if (this.isFullscreenSupported) {
-                if (!isFullscreen)
-                    GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
-                else
-                    GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-
-                this.isFullscreen = !this.isFullscreen;
-            } else {
-                this.fullScreenErrorTimeout = 4;
-            }
+            if (this.isFullscreenSupported) toggleFullscreen();
+            else this.fullScreenErrorTimeout = 4;
         }
 
         profiler.endSection();
     }
+
+	private void toggleFullscreen(){
+		if (!isFullscreen) {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
+            currRender = fullscreenRender;
+            currRenderImage = fullscreenRenderImage;
+        }
+		else {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
+            currRender = normalRender;
+            currRenderImage = normalRenderImage;
+        }
+
+		this.isFullscreen = !this.isFullscreen;
+	}
 
     private void render() {
         if (!running) return;
@@ -206,28 +214,30 @@ public class Game extends Canvas implements Runnable {
             g.clearRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.black);
             g.fillRect(0, 0, getWidth(), getHeight());
-            render.clear();
+            currRender.clear();
 
             // Draw
-            render.renderBackground();
-            render.renderSprite(Sprite.wall, render.getWidth() / 2 - 55, render.getHeight() / 2);
+            if(isFullscreen) currRender.renderBackgroundFull();
+            else currRender.renderBackground();
+
+            currRender.renderSprite(Sprite.wall, currRender.getWidth() / 2 - 55, currRender.getHeight() / 2);
 
             // Render
-            g.drawImage(renderImage, 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(currRenderImage, 0, 0, this.getWidth(), this.getHeight(), null);
 
             // Text
             g.setColor(Color.WHITE);
             if (!keyboard.hasFocus()) {
                 g.setFont(this.font100);
                 g.setColor(Color.WHITE);
-                render.drawStringCenteredAt(g, "Click to focus!!", getWidth() / 2, getHeight() / 2 + (fullScreenErrorTimeout > 0 ? 50 : 0), true);
+                currRender.drawStringCenteredAt(g, "Click to focus!!", getWidth() / 2, getHeight() / 2 + (fullScreenErrorTimeout > 0 ? 50 : 0), true);
                 g.setFont(this.font32);
             }
 
             if (fullScreenErrorTimeout > 0) {
                 g.setColor(Color.RED);
                 g.setFont(this.font64);
-                render.drawStringCenteredAt(g, "Cannot go Fullscreen :(", getWidth() / 2, getHeight() / 2 - 50, true);
+                currRender.drawStringCenteredAt(g, "Cannot go Fullscreen :(", getWidth() / 2, getHeight() / 2 - 50, true);
                 g.setFont(this.font32);
             }
 

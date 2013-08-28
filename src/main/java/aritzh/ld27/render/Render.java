@@ -1,9 +1,7 @@
 package aritzh.ld27.render;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,19 +16,33 @@ public class Render {
     private int[] pixels;
 
     private static int[] background;
+    private static int[] backgroundFull;
 
-    public Render(int width, int height, int[] pixels) {
+    static{
+        try {
+            BufferedImage bgImageFull = ImageIO.read(Render.class.getResource("/textures/background2.png"));
+            backgroundFull = new int[bgImageFull.getWidth() * bgImageFull.getHeight()];
+            backgroundFull = bgImageFull.getRGB(0, 0, bgImageFull.getWidth(), bgImageFull.getHeight(), Render.backgroundFull, 0, bgImageFull.getWidth());
+
+            BufferedImage bgImage = ImageIO.read(Render.class.getResource("/textures/background.png"));
+            background = new int[bgImage.getWidth() * bgImage.getHeight()];
+            background = bgImage.getRGB(0, 0, bgImage.getWidth(), bgImage.getHeight(), Render.background, 0, bgImage.getWidth());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Render(int width, int height, int[] pixels, int scale) {
         this.width = width;
         this.height = height;
         this.pixels = pixels;
 
-        try {
-            BufferedImage bgImage = ImageIO.read(Render.class.getResource("/textures/background.png"));
-            background = new int[bgImage.getWidth() * bgImage.getHeight()];
-            background = bgImage.getRGB(0, 0, bgImage.getWidth(), bgImage.getHeight(), Render.background, 0, bgImage.getWidth());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if(pixels.length < width*height) throw new IllegalArgumentException("The given array doesn't hold an image as big as " + width + "x" + height);
+    }
+
+    public void renderBackgroundFull() {
+        drawPixels(backgroundFull, 0, 0, width, height);
     }
 
     public void renderBackground() {
@@ -69,7 +81,6 @@ public class Render {
 
     public void drawStringAt(Graphics g, String text, int x, int y) {
         FontMetrics m = g.getFontMetrics();
-
         g.drawString(text, x, y + m.getAscent() - m.getDescent());
     }
 
