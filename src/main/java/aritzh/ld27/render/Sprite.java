@@ -14,7 +14,19 @@ public class Sprite {
     private int width, height;
     private int[] pixels;
 
-    public static Sprite wall = new Sprite(0, 0);
+    public static Sprite floor;
+
+    public static Sprite borderB;
+    public static Sprite borderL;
+    public static Sprite borderR;
+    public static Sprite borderT;
+
+    public static Sprite cornerLB;
+    public static Sprite cornerRB;
+    public static Sprite cornerLT;
+    public static Sprite cornerRT;
+
+    public static Sprite player;
 
     public Sprite(int sx, int sy) {
         sx *= SPRITE_SIZE;
@@ -50,6 +62,23 @@ public class Sprite {
 
     public int[] getPixels() {
         return pixels;
+    }
+
+    public static void init() {
+        Sprite.floor = new Sprite(0, 0);
+
+        Sprite.borderB = new Sprite(1, 0);
+        Sprite.cornerLB = new Sprite(2, 0);
+        Sprite.cornerRB = new Sprite(3, 0);
+
+        Sprite.borderT = new Sprite(4, 0);
+        Sprite.cornerLT = new Sprite(5, 0);
+        Sprite.cornerRT = new Sprite(6, 0);
+
+        Sprite.borderL = new Sprite(7, 0);
+        Sprite.borderR = new Sprite(0, 1);
+
+        Sprite.player = new Sprite(1, 1);
     }
 
 }

@@ -2,7 +2,9 @@
 
 - NEXT
 
-    - Disable scaling in fullscreen mode (possible??)
-    - Add mobs (and player)
+    - Command handling (noclip, invincible...)
+    - Health, and enemies
 
 - TODOs
+
+    - Think of an objective to the game

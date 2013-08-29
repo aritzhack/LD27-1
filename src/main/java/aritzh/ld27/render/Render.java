@@ -1,8 +1,11 @@
 package aritzh.ld27.render;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -11,42 +14,34 @@ import java.util.Arrays;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Render {
+    private static int nWidth;
+    private static int nHeight;
     private int width;
     private int height;
+    private static int scale;
     private int[] pixels;
+    private BufferedImage image;
 
     private static int[] background;
     private static int[] backgroundFull;
 
-    static{
-        try {
-            BufferedImage bgImageFull = ImageIO.read(Render.class.getResource("/textures/background2.png"));
-            backgroundFull = new int[bgImageFull.getWidth() * bgImageFull.getHeight()];
-            backgroundFull = bgImageFull.getRGB(0, 0, bgImageFull.getWidth(), bgImageFull.getHeight(), Render.backgroundFull, 0, bgImageFull.getWidth());
+    public static Render fullRender;
+    public static Render normalRender;
 
-            BufferedImage bgImage = ImageIO.read(Render.class.getResource("/textures/background.png"));
-            background = new int[bgImage.getWidth() * bgImage.getHeight()];
-            background = bgImage.getRGB(0, 0, bgImage.getWidth(), bgImage.getHeight(), Render.background, 0, bgImage.getWidth());
+    public Render(int width, int height) {
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+        this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
-    public Render(int width, int height, int[] pixels, int scale) {
         this.width = width;
         this.height = height;
-        this.pixels = pixels;
+        this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
 
-        if(pixels.length < width*height) throw new IllegalArgumentException("The given array doesn't hold an image as big as " + width + "x" + height);
+        if (pixels.length < width * height)
+            throw new IllegalArgumentException("The given array doesn't hold an image as big as " + width + "x" + height);
     }
 
-    public void renderBackgroundFull() {
-        drawPixels(backgroundFull, 0, 0, width, height);
-    }
-
-    public void renderBackground() {
-        drawPixels(background, 0, 0, width, height);
+    public void renderBackground(boolean fullScreen) {
+        drawPixels((fullScreen ? backgroundFull : background), 0, 0, width, height);
     }
 
     public void clear() {
@@ -56,8 +51,14 @@ public class Render {
     public void drawPixels(int[] pixels, int xp, int yp, int width, int height) {
         if (pixels.length < width * height)
             throw new ArrayIndexOutOfBoundsException("The given array doesn't hold a image as big as " + width + "x" + height);
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        if (xp + width < 0 || yp + height < 0 || xp > this.width || yp > this.height) return;
+        int maxX = Math.min(width, this.width - xp);
+        int maxY = Math.min(height, this.height - yp);
+
+        for (int y = 0; y < maxY; y++) {
+            if (yp + y < 0) continue;
+            for (int x = 0; x < maxX; x++) {
+                if (xp + x < 0) continue;
                 this.pixels[(xp + x) + (yp + y) * this.width] = pixels[x + y * width];
             }
         }
@@ -86,6 +87,8 @@ public class Render {
 
     public void renderSprite(Sprite s, int xp, int yp) {
         this.drawPixels(s.getPixels(), xp, yp, s.getWidth(), s.getHeight());
+
+        this.image.getGraphics().drawRect(xp, yp, s.getWidth(), s.getHeight());
     }
 
     public void setPixel(int x, int y, int color) {
@@ -98,5 +101,33 @@ public class Render {
 
     public int getHeight() {
         return height;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public static void init(int width, int height, int scale) {
+        Render.nWidth = width;
+        Render.nHeight = height;
+        Render.scale = scale;
+    }
+
+    public static void init() {
+        normalRender = new Render(nWidth, nHeight);
+        fullRender = new Render(nWidth * scale, nHeight * scale);
+
+        try {
+            BufferedImage bgImageFull = ImageIO.read(Render.class.getResource("/textures/background2.png"));
+            backgroundFull = new int[bgImageFull.getWidth() * bgImageFull.getHeight()];
+            backgroundFull = bgImageFull.getRGB(0, 0, bgImageFull.getWidth(), bgImageFull.getHeight(), Render.backgroundFull, 0, bgImageFull.getWidth());
+
+            BufferedImage bgImage = ImageIO.read(Render.class.getResource("/textures/background.png"));
+            background = new int[bgImage.getWidth() * bgImage.getHeight()];
+            background = bgImage.getRGB(0, 0, bgImage.getWidth(), bgImage.getHeight(), Render.background, 0, bgImage.getWidth());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

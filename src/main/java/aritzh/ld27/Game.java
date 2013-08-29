@@ -1,19 +1,28 @@
 package aritzh.ld27;
 
+import aritzh.ld27.entity.Player;
+import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Render;
 import aritzh.ld27.render.Sprite;
+import aritzh.ld27.render.SpriteSheet;
 import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 /**
  * @author Aritz Lopez
@@ -26,12 +35,6 @@ public class Game extends Canvas implements Runnable {
     private boolean running;
     private final boolean applet;
 
-    private BufferedImage normalRenderImage;
-    private BufferedImage fullscreenRenderImage;
-    private final Render normalRender;
-    private final Render fullscreenRender;
-
-    private BufferedImage currRenderImage;
     private Render currRender;
 
     private final Keyboard keyboard;
@@ -45,6 +48,10 @@ public class Game extends Canvas implements Runnable {
     private final Font font32;
     private final Font font64;
     private final Font font100;
+
+    private Level level;
+
+    private Player player;
 
 
     public Game(int width, int height, boolean applet, int scale) {
@@ -61,16 +68,20 @@ public class Game extends Canvas implements Runnable {
         this.setPreferredSize(size);
         this.addKeyListener(keyboard);
         this.addFocusListener(keyboard);
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Game.this.level.clicked(e);
+            }
+        });
 
-        currRenderImage = normalRenderImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        currRender = normalRender = new Render(width, height, ((DataBufferInt) normalRenderImage.getRaster().getDataBuffer()).getData(), scale);
-
-        fullscreenRenderImage = new BufferedImage(width*scale, height*scale, BufferedImage.TYPE_INT_ARGB);
-        fullscreenRender = new Render(width*scale, height*scale, ((DataBufferInt) fullscreenRenderImage.getRaster().getDataBuffer()).getData(), scale);
+        Render.init(width, height, scale);
 
         isFullscreenSupported = !applet && GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().isFullScreenSupported();
-        
+
         if (!applet) this.createWindow();
+
+        reload();
     }
 
     public static void main(String[] args) {
@@ -97,13 +108,11 @@ public class Game extends Canvas implements Runnable {
                 Game.this.stop();
             }
         });
-
     }
 
     protected synchronized void start() {
         this.running = true;
         this.thread = new Thread(this, "Main Game Thread");
-
         this.thread.start();
     }
 
@@ -171,8 +180,20 @@ public class Game extends Canvas implements Runnable {
     private void update() {
         profiler.startSection("Update");
 
+        level.update();
+
         if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
             this.stop();
+        }
+
+        if (keyboard.isKeyTyped(KeyEvent.VK_R)) {
+            System.out.println("Reloading...");
+            reload();
+            System.out.println("Reloaded");
+        }
+
+        if (keyboard.isKeyTyped(KeyEvent.VK_F8)) {
+            openConsole();
         }
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
@@ -183,20 +204,38 @@ public class Game extends Canvas implements Runnable {
         profiler.endSection();
     }
 
-	private void toggleFullscreen(){
-		if (!isFullscreen) {
+    private void openConsole() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String command = JOptionPane.showInputDialog("Enter command:");
+            }
+        });
+        t.start();
+    }
+
+    private void reload() {
+
+        Render.init();
+        SpriteSheet.init();
+        Sprite.init();
+        Level.init();
+        currRender = (isFullscreen ? Render.fullRender : Render.normalRender);
+        this.level = Level.LEVEL_1;
+        this.player = new Player(Sprite.player, level, keyboard);
+    }
+
+    private void toggleFullscreen() {
+        if (!isFullscreen) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
-            currRender = fullscreenRender;
-            currRenderImage = fullscreenRenderImage;
-        }
-		else {
+            currRender = Render.fullRender;
+        } else {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-            currRender = normalRender;
-            currRenderImage = normalRenderImage;
+            currRender = Render.normalRender;
         }
 
-		this.isFullscreen = !this.isFullscreen;
-	}
+        this.isFullscreen = !this.isFullscreen;
+    }
 
     private void render() {
         if (!running) return;
@@ -217,13 +256,14 @@ public class Game extends Canvas implements Runnable {
             currRender.clear();
 
             // Draw
-            if(isFullscreen) currRender.renderBackgroundFull();
-            else currRender.renderBackground();
+            currRender.renderBackground(this.isFullscreen);
 
-            currRender.renderSprite(Sprite.wall, currRender.getWidth() / 2 - 55, currRender.getHeight() / 2);
+            this.level.render(currRender);
+
+            //currRender.renderSprite(Sprite.wall, currRender.getWidth() / 2-16, currRender.getHeight() / 2-16);
 
             // Render
-            g.drawImage(currRenderImage, 0, 0, this.getWidth(), this.getHeight(), null);
+            g.drawImage(currRender.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
             // Text
             g.setColor(Color.WHITE);
