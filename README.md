@@ -1,4 +1,4 @@
 LD27-1
 ======
 
-Game after LD27, to improve Game-Making skills
+Game I'm making after LD27, to improve my game-making skills
