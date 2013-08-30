@@ -98,4 +98,7 @@ public class Keyboard implements KeyListener, FocusListener {
         return focus;
     }
 
+    public void resetKey(int keyCode) {
+        this.checked.remove(Integer.valueOf(keyCode));
+    }
 }

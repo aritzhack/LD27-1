@@ -4,6 +4,8 @@ import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Sprite;
 import aritzh.ld27.util.Keyboard;
 
+import java.awt.Rectangle;
+
 /**
  * A player. A Mob controllable by the person playing
  *
@@ -13,27 +15,34 @@ import aritzh.ld27.util.Keyboard;
 public class Player extends Mob {
 
     private Keyboard input;
+    private static final int WIDTH = 17, HEIGHT = 31;
+
+    @Override
+    protected Rectangle getBoundingBox() {
+        return new Rectangle(this.posX + 4, this.posY + 29, this.width - 8, 1);
+    }
 
     /**
      * Constructs an Player at (0,0) with the specified Sprite
      *
-     * @param sprite The sprite that will be drawn when rendering
+     * @param level The level to which the player will be added
+     * @param input The keyboard class that will be used to move the player
      */
-    public Player(Sprite sprite, Level level, Keyboard input) {
-        super(sprite, level);
-        this.input = input;
-        level.setPlayer(this);
+    public Player(Level level, Keyboard input) {
+        this(level, input, 0, 0);
     }
 
     /**
      * Constructs an Player at (posX, posY) with the specified Sprite
      *
-     * @param sprite The sprite that will be drawn when rendering
-     * @param posX   The X coordinate at which the sprite will be drawn
-     * @param posY   The Y coordinate at which the sprite will be drawn
+     * @param level The level to which the player will be added
+     * @param input The keyboard class that will be used to move the player
+     * @param posX  The X coordinate at which the sprite will be drawn
+     * @param posY  The Y coordinate at which the sprite will be drawn
      */
-    public Player(Sprite sprite, Level level, Keyboard input, int posX, int posY) {
-        super(sprite, level, posX, posY);
+    public Player(Level level, Keyboard input, int posX, int posY) {
+        super(new Sprite(2, 1, WIDTH, HEIGHT), level, posX, posY);
+        level.setPlayer(this);
         this.input = input;
     }
 

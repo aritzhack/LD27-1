@@ -28,7 +28,7 @@ public class Level {
     private final int width;
     private final int height;
 
-    public static Level LEVEL_1;
+    private static Level LEVEL_1;
     private Player player;
 
     public List<Entity> entities = new ArrayList<Entity>();
@@ -147,7 +147,8 @@ public class Level {
     public void clicked(MouseEvent e) {
         int x = (int) Math.floor((double) e.getX() / ((double) SpriteSheet.SPRITE_SIZE * 2));
         int y = (int) Math.floor((double) e.getY() / ((double) SpriteSheet.SPRITE_SIZE * 2));
-        System.out.println(this.tiles[x][y].getID());
+        if (x > this.width - 1 || y > this.height - 1) System.out.println("Clicked out of the world");
+        else System.out.println("Clicked tile at (" + x + ", " + y + ") with ID: " + this.tiles[x][y].getID());
     }
 
     public void setPlayer(Player player) {
@@ -160,5 +161,9 @@ public class Level {
 
     public void addEntity(Entity entity) {
         this.entities.add(entity);
+    }
+
+    public static Level getLEVEL_1() {
+        return LEVEL_1;
     }
 }

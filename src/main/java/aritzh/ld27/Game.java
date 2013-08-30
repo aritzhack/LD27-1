@@ -3,8 +3,6 @@ package aritzh.ld27;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Render;
-import aritzh.ld27.render.Sprite;
-import aritzh.ld27.render.SpriteSheet;
 import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
 
@@ -209,20 +207,26 @@ public class Game extends Canvas implements Runnable {
             @Override
             public void run() {
                 String command = JOptionPane.showInputDialog("Enter command:");
+                keyboard.resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
+                if (command == null) return;
+                command = command.trim().toLowerCase();
+                if (command.equals("noclip")) {
+                    Game.this.level.getPlayer().toggleNoClip();
+                } else if (command.equals("norender")) {
+                    Game.this.level.getPlayer().toggleNoRender();
+                }
+
             }
         });
         t.start();
     }
 
     private void reload() {
-
         Render.init();
-        SpriteSheet.init();
-        Sprite.init();
         Level.init();
         currRender = (isFullscreen ? Render.fullRender : Render.normalRender);
-        this.level = Level.LEVEL_1;
-        this.player = new Player(Sprite.player, level, keyboard);
+        this.level = Level.getLEVEL_1();
+        this.player = new Player(level, keyboard);
     }
 
     private void toggleFullscreen() {
@@ -260,8 +264,6 @@ public class Game extends Canvas implements Runnable {
 
             this.level.render(currRender);
 
-            //currRender.renderSprite(Sprite.wall, currRender.getWidth() / 2-16, currRender.getHeight() / 2-16);
-
             // Render
             g.drawImage(currRender.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
@@ -282,7 +284,7 @@ public class Game extends Canvas implements Runnable {
             }
 
             g.dispose();
-            bs.show();
+            if (running) bs.show();
         }
         profiler.endSection("Render");
     }

@@ -15,7 +15,9 @@ public abstract class Entity {
     protected Level level;
     protected int posX;
     protected int posY;
+    protected int width, height;
     protected Sprite sprite;
+    private boolean noRender;
 
     /**
      * Constructs an Entity at (0,0) with the specified Sprite
@@ -38,6 +40,8 @@ public abstract class Entity {
         this.level = level;
         this.posX = posX;
         this.posY = posY;
+        this.width = sprite.getWidth();
+        this.height = sprite.getHeight();
 
         if (!(this instanceof Player)) {
             this.level.addEntity(this);
@@ -102,6 +106,10 @@ public abstract class Entity {
      * @param render The Render used to render the Entity
      */
     public void render(Render render) {
-        render.renderSprite(sprite, posX, posY);
+        if (!noRender) render.renderSprite(sprite, posX, posY);
+    }
+
+    public void toggleNoRender() {
+        this.noRender = !this.noRender;
     }
 }

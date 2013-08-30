@@ -14,6 +14,7 @@ import java.awt.Rectangle;
 public abstract class Mob extends Entity {
 
     protected int velX, velY;
+    protected boolean noclip = false;
 
     /**
      * Constructs an Mob at (0,0) with the specified Sprite
@@ -82,15 +83,24 @@ public abstract class Mob extends Entity {
         checkCollision(0, 1);
     }
 
-    private void checkCollision(int x, int y) {
-        int newPosX = this.posX + velX * x;
-        int newPosY = this.posY + velY * y;
+    protected void checkCollision(int x, int y) {
+        int deltaX = velX * x;
+        int deltaY = velY * y;
 
-        Rectangle r = new Rectangle(newPosX, newPosY, this.sprite.getWidth(), this.sprite.getHeight());
+        Rectangle r = this.getBoundingBox();
+        r.translate(deltaX, deltaY);
 
-        if (!this.level.collides(r)) {
-            this.posX = newPosX;
-            this.posY = newPosY;
+        if (!this.level.collides(r) || noclip) {
+            this.posX += deltaX;
+            this.posY += deltaY;
         }
+    }
+
+    public void toggleNoClip() {
+        this.noclip = !this.noclip;
+    }
+
+    protected Rectangle getBoundingBox() {
+        return new Rectangle(this.posX, this.posY, this.width, this.height);
     }
 }

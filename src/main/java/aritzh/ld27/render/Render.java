@@ -1,5 +1,7 @@
 package aritzh.ld27.render;
 
+import aritzh.ld27.util.ColorUtil;
+
 import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -19,6 +21,7 @@ public class Render {
     private int width;
     private int height;
     private static int scale;
+
     private int[] pixels;
     private BufferedImage image;
 
@@ -30,10 +33,11 @@ public class Render {
 
     public Render(int width, int height) {
 
-        this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         this.width = width;
         this.height = height;
+
+        this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
 
         if (pixels.length < width * height)
@@ -59,7 +63,12 @@ public class Render {
             if (yp + y < 0) continue;
             for (int x = 0; x < maxX; x++) {
                 if (xp + x < 0) continue;
-                this.pixels[(xp + x) + (yp + y) * this.width] = pixels[x + y * width];
+
+                int index = (xp + x) + (yp + y) * this.width;
+                int newPixel = pixels[x + y * width];
+                int oldPixel = this.pixels[index];
+                if (newPixel >>> 24 == 0) continue;
+                this.pixels[index] = ColorUtil.composite(newPixel, oldPixel);
             }
         }
     }
@@ -87,8 +96,6 @@ public class Render {
 
     public void renderSprite(Sprite s, int xp, int yp) {
         this.drawPixels(s.getPixels(), xp, yp, s.getWidth(), s.getHeight());
-
-        this.image.getGraphics().drawRect(xp, yp, s.getWidth(), s.getHeight());
     }
 
     public void setPixel(int x, int y, int color) {
@@ -130,4 +137,5 @@ public class Render {
             e.printStackTrace();
         }
     }
+
 }

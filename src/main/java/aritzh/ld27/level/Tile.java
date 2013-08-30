@@ -15,7 +15,7 @@ public class Tile {
     private int id;
     private boolean solid;
 
-    public static Map<Integer, Tile> idToTile = new HashMap<Integer, Tile>();
+    public static final Map<Integer, Tile> idToTile = new HashMap<Integer, Tile>();
 
     public static final Tile TILE_FLOOR = new Tile(Sprite.floor, 0, false);
 

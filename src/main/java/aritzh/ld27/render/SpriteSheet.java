@@ -11,7 +11,7 @@ import java.io.IOException;
 public class SpriteSheet {
 
     public static final int SPRITE_SIZE = 32;
-    public static SpriteSheet SHEET;
+    protected static final SpriteSheet SHEET = new SpriteSheet("/textures/sheet.png");
     public BufferedImage image;
 
     private int width, height;
@@ -32,9 +32,5 @@ public class SpriteSheet {
 
     public int getWidth() {
         return width;
-    }
-
-    public static void init() {
-        SpriteSheet.SHEET = new SpriteSheet("/textures/sheet.png");
     }
 }

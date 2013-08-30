@@ -1,5 +1,6 @@
 package aritzh.ld27;
 
+import java.applet.Applet;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 
@@ -7,7 +8,7 @@ import java.awt.HeadlessException;
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class Applet extends java.applet.Applet {
+public class GameApplet extends Applet {
 
     Game game;
 
@@ -24,12 +25,13 @@ public class Applet extends java.applet.Applet {
      * @see java.awt.GraphicsEnvironment#isHeadless
      * @since 1.4
      */
-    public Applet() throws HeadlessException {
+    public GameApplet() throws HeadlessException {
         super();
-        Dimension size = new Dimension(800, 600);
+        Dimension size = new Dimension(800, 450);
         this.setSize(size);
         this.setMinimumSize(size);
         this.setPreferredSize(size);
+        this.setMaximumSize(size);
     }
 
     /**
@@ -46,14 +48,14 @@ public class Applet extends java.applet.Applet {
      * The implementation of this method provided by the
      * <code>Applet</code> class does nothing.
      *
-     * @see java.applet.Applet#destroy()
-     * @see java.applet.Applet#start()
-     * @see java.applet.Applet#stop()
+     * @see Applet#destroy()
+     * @see Applet#start()
+     * @see Applet#stop()
      */
     @Override
     public void init() {
         super.init();    //To change body of overridden methods use File | Settings | File Templates.
-        this.game = new Game(this.getWidth(), this.getHeight(), true, 2);
+        this.game = new Game(400, 225, true, 2);
         this.add(game);
         game.start();
     }
@@ -74,8 +76,8 @@ public class Applet extends java.applet.Applet {
      * The implementation of this method provided by the
      * <code>Applet</code> class does nothing.
      *
-     * @see java.applet.Applet#destroy()
-     * @see java.applet.Applet#init()
+     * @see Applet#destroy()
+     * @see Applet#init()
      */
     @Override
     public void stop() {
