@@ -27,28 +27,22 @@ import java.awt.image.BufferStrategy;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Game extends Canvas implements Runnable {
+    private final boolean applet;
+    private final Keyboard keyboard;
+    private final boolean isFullscreenSupported;
+    private final Font font32;
+    private final Font font64;
+    private final Font font100;
     private JFrame frame;
     private Thread thread;
     private Profiler profiler = new Profiler();
     private boolean running;
-    private final boolean applet;
-
     private Render currRender;
-
-    private final Keyboard keyboard;
     private long timeInSeconds = 0;
     private Dimension size;
-
-    private final boolean isFullscreenSupported;
     private boolean isFullscreen;
     private int fullScreenErrorTimeout;
-
-    private final Font font32;
-    private final Font font64;
-    private final Font font100;
-
     private Level level;
-
     private Player player;
 
 
@@ -82,9 +76,12 @@ public class Game extends Canvas implements Runnable {
         reload();
     }
 
-    public static void main(String[] args) {
-        Game g = new Game(400, 225, false, 2);
-        g.start();
+    private void reload() {
+        Render.init();
+        Level.init();
+        currRender = (isFullscreen ? Render.fullRender : Render.normalRender);
+        this.level = Level.getLEVEL_1();
+        this.player = new Player(level, keyboard);
     }
 
     private void createWindow() {
@@ -108,12 +105,6 @@ public class Game extends Canvas implements Runnable {
         });
     }
 
-    protected synchronized void start() {
-        this.running = true;
-        this.thread = new Thread(this, "Main Game Thread");
-        this.thread.start();
-    }
-
     public synchronized void stop() {
         running = false;
         if (!applet) this.frame.dispose();
@@ -124,6 +115,17 @@ public class Game extends Canvas implements Runnable {
         }
 
         System.out.println("Exiting...");
+    }
+
+    public static void main(String[] args) {
+        Game g = new Game(400, 225, false, 2);
+        g.start();
+    }
+
+    protected synchronized void start() {
+        this.running = true;
+        this.thread = new Thread(this, "Main Game Thread");
+        this.thread.start();
     }
 
     /**
@@ -175,72 +177,6 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    private void update() {
-        profiler.startSection("Update");
-
-        level.update();
-
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
-            this.stop();
-        }
-
-        if (keyboard.isKeyTyped(KeyEvent.VK_R)) {
-            System.out.println("Reloading...");
-            reload();
-            System.out.println("Reloaded");
-        }
-
-        if (keyboard.isKeyTyped(KeyEvent.VK_F8)) {
-            openConsole();
-        }
-
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
-            if (this.isFullscreenSupported) toggleFullscreen();
-            else this.fullScreenErrorTimeout = 4;
-        }
-
-        profiler.endSection();
-    }
-
-    private void openConsole() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String command = JOptionPane.showInputDialog("Enter command:");
-                keyboard.resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
-                if (command == null) return;
-                command = command.trim().toLowerCase();
-                if (command.equals("noclip")) {
-                    Game.this.level.getPlayer().toggleNoClip();
-                } else if (command.equals("norender")) {
-                    Game.this.level.getPlayer().toggleNoRender();
-                }
-
-            }
-        });
-        t.start();
-    }
-
-    private void reload() {
-        Render.init();
-        Level.init();
-        currRender = (isFullscreen ? Render.fullRender : Render.normalRender);
-        this.level = Level.getLEVEL_1();
-        this.player = new Player(level, keyboard);
-    }
-
-    private void toggleFullscreen() {
-        if (!isFullscreen) {
-            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
-            currRender = Render.fullRender;
-        } else {
-            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-            currRender = Render.normalRender;
-        }
-
-        this.isFullscreen = !this.isFullscreen;
-    }
-
     private void render() {
         if (!running) return;
         profiler.startSection("Render");
@@ -287,5 +223,63 @@ public class Game extends Canvas implements Runnable {
             if (running) bs.show();
         }
         profiler.endSection("Render");
+    }
+
+    private void update() {
+        profiler.startSection("Update");
+
+        level.update();
+
+        if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
+            this.stop();
+        }
+
+        if (keyboard.isKeyTyped(KeyEvent.VK_R)) {
+            System.out.println("Reloading...");
+            reload();
+            System.out.println("Reloaded");
+        }
+
+        if (keyboard.isKeyTyped(KeyEvent.VK_F8)) {
+            openConsole();
+        }
+
+        if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
+            if (this.isFullscreenSupported) toggleFullscreen();
+            else this.fullScreenErrorTimeout = 4;
+        }
+
+        profiler.endSection();
+    }
+
+    private void toggleFullscreen() {
+        if (!isFullscreen) {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
+            currRender = Render.fullRender;
+        } else {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
+            currRender = Render.normalRender;
+        }
+
+        this.isFullscreen = !this.isFullscreen;
+    }
+
+    private void openConsole() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String command = JOptionPane.showInputDialog("Enter command:");
+                keyboard.resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
+                if (command == null) return;
+                command = command.trim().toLowerCase();
+                if (command.equals("noclip")) {
+                    Game.this.level.getPlayer().toggleNoClip();
+                } else if (command.equals("norender")) {
+                    Game.this.level.getPlayer().toggleNoRender();
+                }
+
+            }
+        });
+        t.start();
     }
 }

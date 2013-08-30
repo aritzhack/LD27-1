@@ -14,13 +14,8 @@ import java.awt.Rectangle;
  */
 public class Player extends Mob {
 
-    private Keyboard input;
     private static final int WIDTH = 16, HEIGHT = 31;
-
-    @Override
-    public Rectangle getBoundingBox() {
-        return new Rectangle(this.posX + 6, this.posY + 27, this.width - 11, 2);
-    }
+    private Keyboard input;
 
     /**
      * Constructs an Player at (0,0) with the specified Sprite
@@ -44,6 +39,11 @@ public class Player extends Mob {
         super(new Sprite(2, 1, WIDTH, HEIGHT), level, posX, posY);
         level.setPlayer(this);
         this.input = input;
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        return new Rectangle(this.posX + 6, this.posY + 27, this.width - 11, 2);
     }
 
     @Override

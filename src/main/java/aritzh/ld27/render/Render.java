@@ -16,23 +16,19 @@ import java.util.Arrays;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Render {
+    public static Render fullRender;
+    public static Render normalRender;
     private static int nWidth;
     private static int nHeight;
+    private static int scale;
+    private static int[] background;
+    private static int[] backgroundFull;
     private int width;
     private int height;
-    private static int scale;
-
     private int[] pixels;
     private BufferedImage image;
 
-    private static int[] background;
-    private static int[] backgroundFull;
-
-    public static Render fullRender;
-    public static Render normalRender;
-
     public Render(int width, int height) {
-
 
         this.width = width;
         this.height = height;
@@ -42,6 +38,29 @@ public class Render {
 
         if (pixels.length < width * height)
             throw new IllegalArgumentException("The given array doesn't hold an image as big as " + width + "x" + height);
+    }
+
+    public static void init(int width, int height, int scale) {
+        Render.nWidth = width;
+        Render.nHeight = height;
+        Render.scale = scale;
+    }
+
+    public static void init() {
+        normalRender = new Render(nWidth, nHeight);
+        fullRender = new Render(nWidth * scale, nHeight * scale);
+
+        try {
+            BufferedImage bgImageFull = ImageIO.read(Render.class.getResource("/textures/background2.png"));
+            backgroundFull = new int[bgImageFull.getWidth() * bgImageFull.getHeight()];
+            backgroundFull = bgImageFull.getRGB(0, 0, bgImageFull.getWidth(), bgImageFull.getHeight(), Render.backgroundFull, 0, bgImageFull.getWidth());
+
+            BufferedImage bgImage = ImageIO.read(Render.class.getResource("/textures/background.png"));
+            background = new int[bgImage.getWidth() * bgImage.getHeight()];
+            background = bgImage.getRGB(0, 0, bgImage.getWidth(), bgImage.getHeight(), Render.background, 0, bgImage.getWidth());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void renderBackground(boolean fullScreen) {
@@ -112,30 +131,6 @@ public class Render {
 
     public BufferedImage getImage() {
         return image;
-    }
-
-    public static void init(int width, int height, int scale) {
-        Render.nWidth = width;
-        Render.nHeight = height;
-        Render.scale = scale;
-    }
-
-    public static void init() {
-        normalRender = new Render(nWidth, nHeight);
-        fullRender = new Render(nWidth * scale, nHeight * scale);
-
-        try {
-            BufferedImage bgImageFull = ImageIO.read(Render.class.getResource("/textures/background2.png"));
-            backgroundFull = new int[bgImageFull.getWidth() * bgImageFull.getHeight()];
-            backgroundFull = bgImageFull.getRGB(0, 0, bgImageFull.getWidth(), bgImageFull.getHeight(), Render.backgroundFull, 0, bgImageFull.getWidth());
-
-            BufferedImage bgImage = ImageIO.read(Render.class.getResource("/textures/background.png"));
-            background = new int[bgImage.getWidth() * bgImage.getHeight()];
-            background = bgImage.getRGB(0, 0, bgImage.getWidth(), bgImage.getHeight(), Render.background, 0, bgImage.getWidth());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

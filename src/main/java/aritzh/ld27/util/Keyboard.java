@@ -15,7 +15,6 @@ public class Keyboard implements KeyListener, FocusListener {
 
     boolean focus = true;
     boolean[] keys = new boolean[Character.MAX_VALUE];
-
     ArrayList<Integer> checked = new ArrayList<Integer>();
 
     /**

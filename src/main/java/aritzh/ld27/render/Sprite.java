@@ -11,22 +11,18 @@ import static aritzh.ld27.render.SpriteSheet.SPRITE_SIZE;
  */
 public class Sprite {
 
-    private int width, height;
-    private int[] pixels;
-
     public static final Sprite floor = new Sprite(0, 0);
-
     public static final Sprite borderB = new Sprite(1, 0);
     public static final Sprite borderL = new Sprite(7, 0);
     public static final Sprite borderR = new Sprite(0, 1);
     public static final Sprite borderT = new Sprite(4, 0);
-
     public static final Sprite cornerLB = new Sprite(2, 0);
     public static final Sprite cornerRB = new Sprite(3, 0);
     public static final Sprite cornerLT = new Sprite(5, 0);
     public static final Sprite cornerRT = new Sprite(6, 0);
-
     public static final Sprite player = new Sprite(2, 1);
+    private int width, height;
+    private int[] pixels;
 
     public Sprite(int sx, int sy) {
         this(sx, sy, SpriteSheet.SPRITE_SIZE, SpriteSheet.SPRITE_SIZE);

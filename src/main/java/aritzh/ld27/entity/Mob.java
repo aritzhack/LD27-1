@@ -96,11 +96,11 @@ public abstract class Mob extends Entity {
         }
     }
 
-    public void toggleNoClip() {
-        this.noclip = !this.noclip;
-    }
-
     protected Rectangle getBoundingBox() {
         return new Rectangle(this.posX, this.posY, this.width, this.height);
+    }
+
+    public void toggleNoClip() {
+        this.noclip = !this.noclip;
     }
 }

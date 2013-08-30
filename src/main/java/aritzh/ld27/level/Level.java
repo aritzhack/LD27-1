@@ -24,14 +24,12 @@ import java.util.List;
  */
 public class Level {
 
-    private Tile[][] tiles;
+    private static Level LEVEL_1;
     private final int width;
     private final int height;
-
-    private static Level LEVEL_1;
-    private Player player;
-
     public List<Entity> entities = new ArrayList<Entity>();
+    private Tile[][] tiles;
+    private Player player;
 
     public Level(String path) throws IOException {
         this(Level.class.getResourceAsStream(path));
@@ -75,6 +73,18 @@ public class Level {
 
         reader.close();
         iStream.close();
+    }
+
+    public static void init() {
+        try {
+            Level.LEVEL_1 = new Level("/levels/level1.lvl");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Level getLEVEL_1() {
+        return LEVEL_1;
     }
 
     public void render(Render render) {
@@ -124,14 +134,6 @@ public class Level {
         return Arrays.deepToString(this.tiles);
     }
 
-    public static void init() {
-        try {
-            Level.LEVEL_1 = new Level("/levels/level1.lvl");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public boolean collides(Rectangle r) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
@@ -151,19 +153,15 @@ public class Level {
         else System.out.println("Clicked tile at (" + x + ", " + y + ") with ID: " + this.tiles[x][y].getID());
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Player getPlayer() {
         return player;
     }
 
-    public void addEntity(Entity entity) {
-        this.entities.add(entity);
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
-    public static Level getLEVEL_1() {
-        return LEVEL_1;
+    public void addEntity(Entity entity) {
+        this.entities.add(entity);
     }
 }

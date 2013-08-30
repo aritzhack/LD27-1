@@ -13,7 +13,6 @@ public class SpriteSheet {
     public static final int SPRITE_SIZE = 32;
     protected static final SpriteSheet SHEET = new SpriteSheet("/textures/sheet.png");
     public BufferedImage image;
-
     private int width, height;
 
     public SpriteSheet(String path) {

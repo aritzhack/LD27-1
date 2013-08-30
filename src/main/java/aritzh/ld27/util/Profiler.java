@@ -24,6 +24,11 @@ public class Profiler {
         trace.push(section);
     }
 
+    public synchronized void endSection() {
+        if (trace.empty()) throw new IllegalStateException("There are no open sections to close!");
+        this.endSection(trace.pop());
+    }
+
     public synchronized void endSection(String section) {
         section = section.toLowerCase();
         if (!startTime.containsKey(section))
@@ -32,11 +37,6 @@ public class Profiler {
         long before = startTime.remove(section);
         elapsedTime.put(section, System.nanoTime() - before);
 
-    }
-
-    public synchronized void endSection() {
-        if (trace.empty()) throw new IllegalStateException("There are no open sections to close!");
-        this.endSection(trace.pop());
     }
 
     public synchronized long getSectionTime(String section) {
