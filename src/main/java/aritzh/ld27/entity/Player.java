@@ -15,11 +15,11 @@ import java.awt.Rectangle;
 public class Player extends Mob {
 
     private Keyboard input;
-    private static final int WIDTH = 17, HEIGHT = 31;
+    private static final int WIDTH = 16, HEIGHT = 31;
 
     @Override
-    protected Rectangle getBoundingBox() {
-        return new Rectangle(this.posX + 4, this.posY + 29, this.width - 8, 1);
+    public Rectangle getBoundingBox() {
+        return new Rectangle(this.posX + 6, this.posY + 27, this.width - 11, 2);
     }
 
     /**
