@@ -19,7 +19,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 /**
@@ -49,14 +48,16 @@ public class Game extends Canvas implements Runnable {
 
 
     public Game(int width, int height, boolean applet, int scale) {
-        size = new Dimension(width * scale, height * scale);
+        this.size = new Dimension(width * scale, height * scale);
 
-        keyboard = new Keyboard();
+        this.keyboard = new Keyboard();
         this.applet = applet;
 
         this.setFont(font32 = new Font("Consola", Font.PLAIN, 32));
-        font64 = new Font("Consola", Font.PLAIN, 64);
-        font100 = new Font("Consola", Font.PLAIN, 100);
+        this.font64 = new Font("Consola", Font.PLAIN, 64);
+        this.font100 = new Font("Consola", Font.PLAIN, 100);
+        this.setFont(this.font100);
+
         this.setSize(size);
         this.setMaximumSize(size);
         this.setPreferredSize(size);
@@ -71,7 +72,7 @@ public class Game extends Canvas implements Runnable {
 
         Render.init(width, height, scale);
 
-        isFullscreenSupported = !applet && GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().isFullScreenSupported();
+        this.isFullscreenSupported = !applet && GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().isFullScreenSupported();
 
         if (!applet) this.createWindow();
 
@@ -81,26 +82,26 @@ public class Game extends Canvas implements Runnable {
     private void reload() {
         Render.init();
         Level.init();
-        currRender = (isFullscreen ? Render.fullRender : Render.normalRender);
+        this.currRender = (this.isFullscreen ? Render.fullRender : Render.normalRender);
         this.level = Level.getLEVEL_1();
-        this.player = new Player(level, keyboard);
+        this.player = new Player(this.level, this.keyboard);
         this.level.setPlayer(this.player);
     }
 
     private void createWindow() {
 
-        frame = new JFrame();
-        frame.setResizable(false);
-        frame.setTitle("LD27 Late Entry");
-        frame.add(this);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setSize(size);
-        frame.setMaximumSize(size);
-        frame.setPreferredSize(size);
-        frame.pack();
-        frame.setVisible(true);
-        frame.addWindowListener(new WindowAdapter() {
+        this.frame = new JFrame();
+        this.frame.setResizable(false);
+        this.frame.setTitle("LD27 Late Entry");
+        this.frame.add(this);
+        this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setSize(size);
+        this.frame.setMaximumSize(size);
+        this.frame.setPreferredSize(size);
+        this.frame.pack();
+        this.frame.setVisible(true);
+        this.frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 Game.this.stop();
@@ -109,8 +110,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     public synchronized void stop() {
-        running = false;
-        if (!applet) this.frame.dispose();
+        this.running = false;
+        if (!this.applet) this.frame.dispose();
         try {
             this.thread.join(3000);
         } catch (InterruptedException e) {
@@ -153,7 +154,7 @@ public class Game extends Canvas implements Runnable {
         if (!this.hasFocus()) this.requestFocus();
 
         while (running) {
-            profiler.startSection("MainLoop");
+            this.profiler.startSection("MainLoop");
 
             long now = System.nanoTime();
             delta += (now - lastTime) / NS;
@@ -161,13 +162,14 @@ public class Game extends Canvas implements Runnable {
             if (delta >= 1) {
                 update();
                 delta--;
-                updates++;
+                this.updates++;
             }
             render();
 
-            frames++;
-            if (System.currentTimeMillis() - timer > 1000) {
+            this.frames++;
+            if (System.currentTimeMillis() - this.timer > 1000) {
                 updatePerSecond();
+                System.out.println(this.updates + "ups\t|\t" + this.frames + "fps\t|\tUpdateTime: " + this.profiler.getSectionTime("update") + "\t|\tRenderTime: " + this.profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + this.profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + this.timeInSeconds);
                 this.timer += 1000;
                 this.updates = 0;
                 this.frames = 0;
@@ -175,24 +177,29 @@ public class Game extends Canvas implements Runnable {
                 this.timeInSeconds++;
             }
 
-            profiler.endSection("MainLoop");
+            this.profiler.endSection();
         }
     }
 
     private void updatePerSecond() {
-        profiler.startSection("UpdatePS");
-        System.out.println(updates + "ups\t|\t" + frames + "fps\t|\tUpdateTime: " + profiler.getSectionTime("update") + "\t|\tRenderTime: " + profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + timeInSeconds);
-        this.level.updatePS();
-        profiler.endSection();
+        this.profiler.startSection("UpdatePS");
 
+        if (!this.keyboard.hasFocus()) {
+            this.profiler.endSection();
+            return;
+        }
+
+        this.level.updatePS();
+
+        this.profiler.endSection();
     }
 
     private void render() {
-        if (!running) return;
-        profiler.startSection("Render");
-        BufferStrategy bs = getBufferStrategy();
+        if (!this.running) return;
+        this.profiler.startSection("Render");
+        BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
-            createBufferStrategy(3);
+            this.createBufferStrategy(3);
         } else {
             // Init
             Graphics g = bs.getDrawGraphics();
@@ -208,35 +215,40 @@ public class Game extends Canvas implements Runnable {
             // Draw
             currRender.renderBackground(this.isFullscreen);
 
-            this.level.render(currRender);
+            this.level.render(this.currRender);
 
             // Render
-            g.drawImage(currRender.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+            g.drawImage(this.currRender.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
             // Text
             g.setColor(Color.WHITE);
-            if (!keyboard.hasFocus()) {
+            if (!this.keyboard.hasFocus()) {
                 g.setFont(this.font100);
                 g.setColor(Color.WHITE);
-                currRender.drawStringCenteredAt(g, "Click to focus!!", getWidth() / 2, getHeight() / 2 + (fullScreenErrorTimeout > 0 ? 50 : 0), true);
+                this.currRender.drawStringCenteredAt(g, "Click to focus!!", getWidth() / 2, getHeight() / 2 + (this.fullScreenErrorTimeout > 0 ? 50 : 0), true);
                 g.setFont(this.font32);
             }
 
-            if (fullScreenErrorTimeout > 0) {
+            if (this.fullScreenErrorTimeout > 0) {
                 g.setColor(Color.RED);
                 g.setFont(this.font64);
-                currRender.drawStringCenteredAt(g, "Cannot go Fullscreen :(", getWidth() / 2, getHeight() / 2 - 50, true);
+                this.currRender.drawStringCenteredAt(g, "Cannot go Fullscreen :(", getWidth() / 2, getHeight() / 2 - 50, true);
                 g.setFont(this.font32);
             }
 
             g.dispose();
-            if (running) bs.show();
+            if (this.running) bs.show();
         }
-        profiler.endSection("Render");
+        this.profiler.endSection();
     }
 
     private void update() {
-        profiler.startSection("Update");
+        this.profiler.startSection("Update");
+
+        if (!this.keyboard.hasFocus()) {
+            this.profiler.endSection();
+            return;
+        }
 
         level.update();
 
@@ -244,13 +256,13 @@ public class Game extends Canvas implements Runnable {
             this.stop();
         }
 
-        if (keyboard.isKeyTyped(KeyEvent.VK_R)) {
+        if (this.keyboard.isKeyTyped(KeyEvent.VK_R)) {
             System.out.println("Reloading...");
             reload();
             System.out.println("Reloaded");
         }
 
-        if (keyboard.isKeyTyped(KeyEvent.VK_F8)) {
+        if (this.keyboard.isKeyTyped(KeyEvent.VK_F8)) {
             openConsole();
         }
 
@@ -259,16 +271,16 @@ public class Game extends Canvas implements Runnable {
             else this.fullScreenErrorTimeout = 4;
         }
 
-        profiler.endSection();
+        this.profiler.endSection();
     }
 
     private void toggleFullscreen() {
-        if (!isFullscreen) {
-            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
-            currRender = Render.fullRender;
+        if (!this.isFullscreen) {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this.frame);
+            this.currRender = Render.fullRender;
         } else {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-            currRender = Render.normalRender;
+            this.currRender = Render.normalRender;
         }
 
         this.isFullscreen = !this.isFullscreen;
@@ -279,11 +291,12 @@ public class Game extends Canvas implements Runnable {
             @Override
             public void run() {
                 String command = JOptionPane.showInputDialog("Enter command:");
-                keyboard.resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
+                Game.this.keyboard.resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
                 if (command == null) return;
                 command = command.trim().toLowerCase();
                 if (command.equals("noclip")) {
-                    Game.this.level.getPlayer().toggleNoClip();
+                    boolean noclip = Game.this.level.getPlayer().toggleNoClip();
+                    JOptionPane.showConfirmDialog(Game.this.getParent(), "No-clip " + (noclip ? "enabled" : "disabled"), "No-clip toggled", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 } else if (command.equals("norender")) {
                     Game.this.level.getPlayer().toggleNoRender();
                 } else if (command.equals("godmode") || command.equals("god")) {
