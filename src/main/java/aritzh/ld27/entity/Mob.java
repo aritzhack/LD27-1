@@ -32,8 +32,8 @@ public abstract class Mob extends Entity {
      * @param posX   The X coordinate at which the sprite will be drawn
      * @param posY   The Y coordinate at which the sprite will be drawn
      */
-    public Mob(Sprite sprite, Level level, int posX, int posY) {
-        super(sprite, level, posX, posY);
+    public Mob(Sprite sprite, Level level, int posX, int posY, int maxHealth) {
+        super(sprite, level, posX, posY, maxHealth);
     }
 
     /**
@@ -94,10 +94,6 @@ public abstract class Mob extends Entity {
             this.posX += deltaX;
             this.posY += deltaY;
         }
-    }
-
-    protected Rectangle getBoundingBox() {
-        return new Rectangle(this.posX, this.posY, this.width, this.height);
     }
 
     public void toggleNoClip() {

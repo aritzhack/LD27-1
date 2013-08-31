@@ -1,8 +1,10 @@
 package aritzh.ld27.level;
 
+import aritzh.ld27.entity.BoxEnemy;
 import aritzh.ld27.entity.Entity;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.render.Render;
+import aritzh.ld27.render.Sprite;
 import aritzh.ld27.render.SpriteSheet;
 
 import java.awt.Rectangle;
@@ -16,6 +18,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -78,6 +81,9 @@ public class Level {
     public static void init() {
         try {
             Level.LEVEL_1 = new Level("/levels/level1.lvl");
+            BoxEnemy e = new BoxEnemy(Sprite.enemy, Level.LEVEL_1);
+            e.setPosX(50);
+            Level.LEVEL_1.addEntity(e);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,10 +107,18 @@ public class Level {
     }
 
     public void update() {
-        this.player.update();
+        Iterator<Entity> iter = this.entities.iterator();
+        while (iter.hasNext()) {
+            Entity e = iter.next();
+            if (e.isDead() && !(e instanceof Player)) iter.remove();
+                //else if (e.isDead())  System.out.println("You DIED!");
+            else e.update();
+        }
+    }
 
-        for (Entity e : entities) {
-            e.update();
+    public void updatePS() {
+        for (Entity e : this.entities) {
+            e.updatePerSecond();
         }
     }
 
@@ -158,10 +172,19 @@ public class Level {
     }
 
     public void setPlayer(Player player) {
+        if (this.entities.contains(this.player)) this.entities.remove(this.player);
         this.player = player;
+        this.entities.add(this.player);
     }
 
     public void addEntity(Entity entity) {
         this.entities.add(entity);
+    }
+
+    public Entity collidesWithEntity(Entity entity) {
+        for (Entity e : this.entities) {
+            if (e != entity && e.getBoundingBox().intersects(entity.getBoundingBox())) return e;
+        }
+        return null;
     }
 }

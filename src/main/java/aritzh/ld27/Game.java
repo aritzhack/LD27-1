@@ -38,7 +38,9 @@ public class Game extends Canvas implements Runnable {
     private Profiler profiler = new Profiler();
     private boolean running;
     private Render currRender;
-    private long timeInSeconds = 0;
+    private long timeInSeconds = 0, timer;
+    private int frames, updates;
+
     private Dimension size;
     private boolean isFullscreen;
     private int fullScreenErrorTimeout;
@@ -82,6 +84,7 @@ public class Game extends Canvas implements Runnable {
         currRender = (isFullscreen ? Render.fullRender : Render.normalRender);
         this.level = Level.getLEVEL_1();
         this.player = new Player(level, keyboard);
+        this.level.setPlayer(this.player);
     }
 
     private void createWindow() {
@@ -142,9 +145,8 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime();
-        long timer = System.currentTimeMillis();
+        this.timer = System.currentTimeMillis();
 
-        int frames = 0, updates = 0;
         final double NS = 1000000000.0 / 60.0;
         double delta = 0;
 
@@ -165,16 +167,24 @@ public class Game extends Canvas implements Runnable {
 
             frames++;
             if (System.currentTimeMillis() - timer > 1000) {
-                timer += 1000;
-                System.out.println(updates + "ups\t|\t" + frames + "fps\t|\tUpdateTime: " + profiler.getSectionTime("update") + "\t|\tRenderTime: " + profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + timeInSeconds);
-                updates = 0;
-                frames = 0;
-                if (fullScreenErrorTimeout > 0) fullScreenErrorTimeout--;
-                timeInSeconds++;
+                updatePerSecond();
+                this.timer += 1000;
+                this.updates = 0;
+                this.frames = 0;
+                if (this.fullScreenErrorTimeout > 0) this.fullScreenErrorTimeout--;
+                this.timeInSeconds++;
             }
 
             profiler.endSection("MainLoop");
         }
+    }
+
+    private void updatePerSecond() {
+        profiler.startSection("UpdatePS");
+        System.out.println(updates + "ups\t|\t" + frames + "fps\t|\tUpdateTime: " + profiler.getSectionTime("update") + "\t|\tRenderTime: " + profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + timeInSeconds);
+        this.level.updatePS();
+        profiler.endSection();
+
     }
 
     private void render() {
@@ -276,6 +286,8 @@ public class Game extends Canvas implements Runnable {
                     Game.this.level.getPlayer().toggleNoClip();
                 } else if (command.equals("norender")) {
                     Game.this.level.getPlayer().toggleNoRender();
+                } else if (command.equals("godmode") || command.equals("god")) {
+                    Game.this.level.getPlayer().toggleGod();
                 }
 
             }

@@ -21,6 +21,8 @@ public class Sprite {
     public static final Sprite cornerLT = new Sprite(5, 0);
     public static final Sprite cornerRT = new Sprite(6, 0);
     public static final Sprite player = new Sprite(2, 1);
+
+    public static final Sprite enemy = new Sprite(1, 1);
     private int width, height;
     private int[] pixels;
 

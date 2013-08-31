@@ -4,6 +4,8 @@ import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Render;
 import aritzh.ld27.render.Sprite;
 
+import java.awt.Rectangle;
+
 /**
  * Static Entity. (Movement is specified explicitly, does not move by itself)
  *
@@ -13,11 +15,15 @@ import aritzh.ld27.render.Sprite;
 public abstract class Entity {
 
     protected Level level;
-    protected int posX;
-    protected int posY;
+    protected int posX, posY;
     protected int width, height;
     protected Sprite sprite;
-    private boolean noRender;
+    protected boolean noRender;
+    protected int health;
+
+    protected final int MAX_HEALTH;
+    protected boolean dead;
+    protected boolean god;
 
     /**
      * Constructs an Entity at (0,0) with the specified Sprite
@@ -25,7 +31,7 @@ public abstract class Entity {
      * @param sprite The sprite that will be drawn when rendering
      */
     public Entity(Sprite sprite, Level level) {
-        this(sprite, level, 0, 0);
+        this(sprite, level, 0, 0, 10);
     }
 
     /**
@@ -35,17 +41,15 @@ public abstract class Entity {
      * @param posX   The X coordinate at which the sprite will be drawn
      * @param posY   The Y coordinate at which the sprite will be drawn
      */
-    public Entity(Sprite sprite, Level level, int posX, int posY) {
+    public Entity(Sprite sprite, Level level, int posX, int posY, int maxHealth) {
         this.sprite = sprite;
         this.level = level;
         this.posX = posX;
         this.posY = posY;
         this.width = sprite.getWidth();
         this.height = sprite.getHeight();
+        this.health = this.MAX_HEALTH = maxHealth;
 
-        if (!(this instanceof Player)) {
-            this.level.addEntity(this);
-        }
     }
 
     /**
@@ -93,11 +97,34 @@ public abstract class Entity {
         return sprite;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+        if (this.health < 0) {
+            this.health = 0;
+            this.dead = true;
+        }
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public Rectangle getBoundingBox() {
+        return new Rectangle(this.posX, this.posY, this.width, this.height);
+    }
+
     /**
      * Called in the game's update method.
      * By default does nothing
      */
     public void update() {
+    }
+
+    public void updatePerSecond() {
+        Entity entity = this.level.collidesWithEntity(this);
+        if (entity != null && entity instanceof IEnemy && !this.dead) {
+            entity.hurt(this);
+        }
     }
 
     /**
@@ -111,5 +138,19 @@ public abstract class Entity {
 
     public void toggleNoRender() {
         this.noRender = !this.noRender;
+    }
+
+    public void hurt(Entity entity) {
+        entity.setHealth(entity.getHealth() - 1);
+        System.out.println("Entity " + entity + " was hurt by " + this + ". Remaining health: " + entity.getHealth());
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void toggleGod() {
+        this.god = !this.god;
+        if (god) this.health = this.MAX_HEALTH;
     }
 }

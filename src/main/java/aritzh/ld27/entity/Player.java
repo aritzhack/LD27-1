@@ -24,7 +24,7 @@ public class Player extends Mob {
      * @param input The keyboard class that will be used to move the player
      */
     public Player(Level level, Keyboard input) {
-        this(level, input, 0, 0);
+        this(level, input, 0, 0, 10);
     }
 
     /**
@@ -35,9 +35,8 @@ public class Player extends Mob {
      * @param posX  The X coordinate at which the sprite will be drawn
      * @param posY  The Y coordinate at which the sprite will be drawn
      */
-    public Player(Level level, Keyboard input, int posX, int posY) {
-        super(new Sprite(2, 1, WIDTH, HEIGHT), level, posX, posY);
-        level.setPlayer(this);
+    public Player(Level level, Keyboard input, int posX, int posY, int maxHealth) {
+        super(new Sprite(2, 1, WIDTH, HEIGHT), level, posX, posY, maxHealth);
         this.input = input;
     }
 
@@ -58,5 +57,10 @@ public class Player extends Mob {
         else this.velX = 0;
 
         super.update();
+    }
+
+    @Override
+    public void setHealth(int health) {
+        if (!god) super.setHealth(health);
     }
 }
