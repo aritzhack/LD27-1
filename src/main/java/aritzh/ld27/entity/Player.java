@@ -47,18 +47,18 @@ public class Player extends Mob {
 
     @Override
     public void setHealth(int health) {
-        if (!god) super.setHealth(health);
+        if (!this.god) super.setHealth(health);
     }
 
     @Override
     public void update() {
 
-        if (input.isDown() && !input.isUp()) this.velY = 1;
-        else if (input.isUp() && !input.isDown()) this.velY = -1;
+        if (this.input.isDown() && !this.input.isUp()) this.velY = 1;
+        else if (this.input.isUp() && !this.input.isDown()) this.velY = -1;
         else this.velY = 0;
 
-        if (input.isLeft() && !input.isRight()) this.velX = -1;
-        else if (input.isRight() && !input.isLeft()) this.velX = 1;
+        if (this.input.isLeft() && !this.input.isRight()) this.velX = -1;
+        else if (this.input.isRight() && !this.input.isLeft()) this.velX = 1;
         else this.velX = 0;
 
         super.update();

@@ -58,7 +58,7 @@ public abstract class Entity {
      * @return the X coordinate of the entity
      */
     public int getPosX() {
-        return posX;
+        return this.posX;
     }
 
     /**
@@ -76,7 +76,7 @@ public abstract class Entity {
      * @return the Y coordinate of the entity
      */
     public int getPosY() {
-        return posY;
+        return this.posY;
     }
 
     /**
@@ -94,7 +94,7 @@ public abstract class Entity {
      * @return the sprite this Entity represents
      */
     public Sprite getSprite() {
-        return sprite;
+        return this.sprite;
     }
 
     public Rectangle getCollisionBox() {
@@ -124,7 +124,7 @@ public abstract class Entity {
     }
 
     public int getHealth() {
-        return health;
+        return this.health;
     }
 
     public void setHealth(int health) {
@@ -147,7 +147,7 @@ public abstract class Entity {
      * @param render The Render used to render the Entity
      */
     public void render(Render render) {
-        if (!noRender) render.renderSprite(sprite, posX, posY);
+        if (!this.noRender) render.renderSprite(this.sprite, this.posX, this.posY);
     }
 
     public void toggleNoRender() {
@@ -155,11 +155,11 @@ public abstract class Entity {
     }
 
     public boolean isDead() {
-        return dead;
+        return this.dead;
     }
 
     public void toggleGod() {
         this.god = !this.god;
-        if (god) this.health = this.MAX_HEALTH;
+        if (this.god) this.health = this.MAX_HEALTH;
     }
 }

@@ -56,8 +56,8 @@ public class GameApplet extends Applet {
     public void init() {
         super.init();    //To change body of overridden methods use File | Settings | File Templates.
         this.game = new Game(400, 225, true, 2);
-        this.add(game);
-        game.start();
+        this.add(this.game);
+        this.game.start();
     }
 
     /**
@@ -82,6 +82,6 @@ public class GameApplet extends Applet {
     @Override
     public void stop() {
         super.stop();
-        game.stop();
+        this.game.stop();
     }
 }

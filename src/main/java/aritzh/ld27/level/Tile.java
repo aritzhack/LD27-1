@@ -28,19 +28,19 @@ public class Tile {
     public Tile(Sprite sprite, int id, boolean isSolid) {
         this.sprite = sprite;
         this.id = id;
-        solid = isSolid;
+        this.solid = isSolid;
 
-        if (idToTile.containsKey(id)) throw new IllegalArgumentException("Chosen ID " + id + " was alredy used");
+        if (idToTile.containsKey(id)) throw new IllegalArgumentException("Chosen ID " + id + " was already used");
         idToTile.put(id, this);
     }
 
     public Sprite getSprite() {
-        return sprite;
+        return this.sprite;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return String.valueOf(this.id);
     }
 
     public boolean isSolid() {
@@ -48,6 +48,6 @@ public class Tile {
     }
 
     public int getID() {
-        return id;
+        return this.id;
     }
 }

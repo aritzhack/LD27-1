@@ -53,10 +53,10 @@ public class Level {
         }
 
         String[] firstLineTokens = lines.get(0).split(":");
-        width = Integer.parseInt(firstLineTokens[0]);
-        height = Integer.parseInt(firstLineTokens[1]);
+        this.width = Integer.parseInt(firstLineTokens[0]);
+        this.height = Integer.parseInt(firstLineTokens[1]);
 
-        this.tiles = new Tile[width][height];
+        this.tiles = new Tile[this.width][this.height];
 
         for (int lineN = 0; lineN < lines.size() - 1; lineN++) {
             String line = lines.get(lineN + 1);
@@ -98,23 +98,23 @@ public class Level {
     }
 
     public void render(Render render) {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                render.renderSprite(tiles[x][y].getSprite(), x * SpriteSheet.SPRITE_SIZE, y * SpriteSheet.SPRITE_SIZE);
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                render.renderSprite(this.tiles[x][y].getSprite(), x * SpriteSheet.SPRITE_SIZE, y * SpriteSheet.SPRITE_SIZE);
             }
         }
-        player.render(render);
+        this.player.render(render);
 
-        for (Entity e : entities) {
+        for (Entity e : this.entities) {
             e.render(render);
         }
     }
 
     public void update() {
-        Iterator<Entity> iter = this.entities.iterator();
-        while (iter.hasNext()) {
-            Entity e = iter.next();
-            if (e.isDead() && !(e instanceof Player)) iter.remove();
+        Iterator<Entity> iterator = this.entities.iterator();
+        while (iterator.hasNext()) {
+            Entity e = iterator.next();
+            if (e.isDead() && !(e instanceof Player)) iterator.remove();
             else if (e.isDead()) System.out.println("You DIED!");
             else e.update();
         }
@@ -153,8 +153,8 @@ public class Level {
     }
 
     public boolean collides(Rectangle r) {
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
                 if (this.tiles[x][y].isSolid()) {
                     if (r.intersects(new Rectangle(x * SpriteSheet.SPRITE_SIZE, y * SpriteSheet.SPRITE_SIZE, SpriteSheet.SPRITE_SIZE, SpriteSheet.SPRITE_SIZE)))
                         return true;
@@ -172,7 +172,7 @@ public class Level {
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     public void setPlayer(Player player) {

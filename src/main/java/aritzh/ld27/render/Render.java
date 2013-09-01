@@ -36,7 +36,7 @@ public class Render {
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
 
-        if (pixels.length < width * height)
+        if (this.pixels.length < width * height)
             throw new IllegalArgumentException("The given array doesn't hold an image as big as " + width + "x" + height);
     }
 
@@ -64,7 +64,7 @@ public class Render {
     }
 
     public void renderBackground(boolean fullScreen) {
-        drawPixels((fullScreen ? backgroundFull : background), 0, 0, width, height);
+        this.drawPixels((fullScreen ? backgroundFull : background), 0, 0, this.width, this.height);
     }
 
     public void drawPixels(int[] pixels, int xp, int yp, int width, int height) {
@@ -89,7 +89,7 @@ public class Render {
     }
 
     public void clear() {
-        Arrays.fill(pixels, 0x00000000);
+        Arrays.fill(this.pixels, 0x00000000);
     }
 
     public void drawStringCenteredAt(Graphics g, String text, int x, int y, boolean shadow) {
@@ -118,19 +118,19 @@ public class Render {
     }
 
     public void setPixel(int x, int y, int color) {
-        this.pixels[x + y * width] = color;
+        this.pixels[x + y * this.width] = color;
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
     public BufferedImage getImage() {
-        return image;
+        return this.image;
     }
 
 }

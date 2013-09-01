@@ -39,26 +39,26 @@ public class Sprite {
         this.pixels = new int[width * height];
 
         BufferedImage image = SpriteSheet.SHEET.image.getSubimage(sx, sy, SPRITE_SIZE, SPRITE_SIZE);
-        this.pixels = image.getRGB(0, 0, width, height, pixels, 0, width);
+        this.pixels = image.getRGB(0, 0, width, height, this.pixels, 0, width);
     }
 
     public Sprite(int width, int height, int color) {
         this.width = width;
         this.height = height;
         this.pixels = new int[width * height];
-        createSprite(color);
+        this.createSprite(color);
     }
 
     private void createSprite(int color) {
-        Arrays.fill(pixels, color);
+        Arrays.fill(this.pixels, color);
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
     public int[] getPixels() {

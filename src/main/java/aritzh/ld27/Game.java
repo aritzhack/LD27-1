@@ -54,16 +54,16 @@ public class Game extends Canvas implements Runnable {
         this.keyboard = new Keyboard();
         this.applet = applet;
 
-        this.setFont(font32 = new Font("Consola", Font.PLAIN, 32));
+        this.setFont(this.font32 = new Font("Consola", Font.PLAIN, 32));
         this.font64 = new Font("Consola", Font.PLAIN, 64);
         this.font100 = new Font("Consola", Font.PLAIN, 100);
         this.setFont(this.font100);
 
-        this.setSize(size);
-        this.setMaximumSize(size);
-        this.setPreferredSize(size);
-        this.addKeyListener(keyboard);
-        this.addFocusListener(keyboard);
+        this.setSize(this.size);
+        this.setMaximumSize(this.size);
+        this.setPreferredSize(this.size);
+        this.addKeyListener(this.keyboard);
+        this.addFocusListener(this.keyboard);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -77,7 +77,7 @@ public class Game extends Canvas implements Runnable {
 
         if (!applet) this.createWindow();
 
-        reload();
+        this.reload();
     }
 
     private void reload() {
@@ -98,9 +98,9 @@ public class Game extends Canvas implements Runnable {
         this.frame.add(this);
         this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.frame.setLocationRelativeTo(null);
-        this.frame.setSize(size);
-        this.frame.setMaximumSize(size);
-        this.frame.setPreferredSize(size);
+        this.frame.setSize(this.size);
+        this.frame.setMaximumSize(this.size);
+        this.frame.setPreferredSize(this.size);
         this.frame.pack();
         this.frame.setVisible(true);
         this.frame.addWindowListener(new WindowAdapter() {
@@ -155,22 +155,22 @@ public class Game extends Canvas implements Runnable {
 
         if (!this.hasFocus()) this.requestFocus();
 
-        while (running) {
+        while (this.running) {
             this.profiler.startSection("MainLoop");
 
             long now = System.nanoTime();
             delta += (now - lastTime) / NS;
             lastTime = now;
             if (delta >= 1) {
-                update();
+                this.update();
                 delta--;
                 this.updates++;
             }
-            render();
+            this.render();
 
             this.frames++;
             if (System.currentTimeMillis() - this.timer > 1000) {
-                updatePerSecond();
+                this.updatePerSecond();
                 System.out.println(this.updates + "ups\t|\t" + this.frames + "fps\t|\tUpdateTime: " + this.profiler.getSectionTime("update") + "\t|\tRenderTime: " + this.profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + this.profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + this.timeInSeconds);
                 this.timer += 1000;
                 this.updates = 0;
@@ -201,22 +201,22 @@ public class Game extends Canvas implements Runnable {
         this.profiler.startSection("Render");
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
-            createBufferStrategy(3);
-            initFonts();
+            this.createBufferStrategy(3);
+            this.initFonts();
         } else {
             // Init
             Graphics g = bs.getDrawGraphics();
-            g.setClip(0, 0, getWidth(), getHeight());
+            g.setClip(0, 0, this.getWidth(), this.getHeight());
             g.setFont(this.font32);
 
             // Clear
-            g.clearRect(0, 0, getWidth(), getHeight());
+            g.clearRect(0, 0, this.getWidth(), this.getHeight());
             g.setColor(Color.black);
-            g.fillRect(0, 0, getWidth(), getHeight());
-            currRender.clear();
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            this.currRender.clear();
 
             // Draw
-            currRender.renderBackground(this.isFullscreen);
+            this.currRender.renderBackground(this.isFullscreen);
 
             this.level.render(this.currRender);
 
@@ -228,14 +228,14 @@ public class Game extends Canvas implements Runnable {
             if (!this.keyboard.hasFocus()) {
                 g.setFont(this.font100);
                 g.setColor(Color.WHITE);
-                this.currRender.drawStringCenteredAt(g, "Click to focus!!", getWidth() / 2, getHeight() / 2 + (this.fullScreenErrorTimeout > 0 ? 50 : 0), true);
+                this.currRender.drawStringCenteredAt(g, "Click to focus!!", this.getWidth() / 2, this.getHeight() / 2 + (this.fullScreenErrorTimeout > 0 ? 50 : 0), true);
                 g.setFont(this.font32);
             }
 
             if (this.fullScreenErrorTimeout > 0) {
                 g.setColor(Color.RED);
                 g.setFont(this.font64);
-                this.currRender.drawStringCenteredAt(g, "Cannot go Fullscreen :(", getWidth() / 2, getHeight() / 2 - 50, true);
+                this.currRender.drawStringCenteredAt(g, "Cannot go Fullscreen :(", this.getWidth() / 2, this.getHeight() / 2 - 50, true);
                 g.setFont(this.font32);
             }
 
@@ -267,7 +267,7 @@ public class Game extends Canvas implements Runnable {
             return;
         }
 
-        level.update();
+        this.level.update();
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
             this.stop();
@@ -275,16 +275,16 @@ public class Game extends Canvas implements Runnable {
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_R)) {
             System.out.println("Reloading...");
-            reload();
+            this.reload();
             System.out.println("Reloaded");
         }
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_F8)) {
-            openConsole();
+            this.openConsole();
         }
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
-            if (this.isFullscreenSupported) toggleFullscreen();
+            if (this.isFullscreenSupported) this.toggleFullscreen();
             else this.fullScreenErrorTimeout = 4;
         }
 
@@ -308,10 +308,10 @@ public class Game extends Canvas implements Runnable {
     }
 
     public Level getLevel() {
-        return level;
+        return this.level;
     }
 
     public Keyboard getKeyboard() {
-        return keyboard;
+        return this.keyboard;
     }
 }

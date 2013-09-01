@@ -17,31 +17,31 @@ public class Profiler {
     public synchronized void startSection(String section) {
         section = section.toLowerCase();
 
-        if (startTime.containsKey(section))
+        if (this.startTime.containsKey(section))
             throw new IllegalArgumentException("Section \"" + section + "\" was been started!");
 
-        startTime.put(section, System.nanoTime());
-        trace.push(section);
+        this.startTime.put(section, System.nanoTime());
+        this.trace.push(section);
     }
 
     public synchronized void endSection() {
-        if (trace.empty()) throw new IllegalStateException("There are no open sections to close!");
-        this.endSection(trace.pop());
+        if (this.trace.empty()) throw new IllegalStateException("There are no open sections to close!");
+        this.endSection(this.trace.pop());
     }
 
     public synchronized void endSection(String section) {
         section = section.toLowerCase();
-        if (!startTime.containsKey(section))
+        if (!this.startTime.containsKey(section))
             throw new IllegalArgumentException("Section \"" + section + "\" hasn't been started!");
 
-        long before = startTime.remove(section);
-        elapsedTime.put(section, System.nanoTime() - before);
+        long before = this.startTime.remove(section);
+        this.elapsedTime.put(section, System.nanoTime() - before);
 
     }
 
     public synchronized long getSectionTime(String section) {
         section = section.toLowerCase();
-        if (!elapsedTime.containsKey(section)) return 0;
-        return elapsedTime.get(section);
+        if (!this.elapsedTime.containsKey(section)) return 0;
+        return this.elapsedTime.get(section);
     }
 }

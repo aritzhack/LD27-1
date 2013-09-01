@@ -42,7 +42,7 @@ public abstract class Mob extends Entity {
      * @return the horizontal velocity
      */
     public int getVelX() {
-        return velX;
+        return this.velX;
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class Mob extends Entity {
      * @return the vertical velocity
      */
     public int getVelY() {
-        return velY;
+        return this.velY;
     }
 
     /**
@@ -79,18 +79,18 @@ public abstract class Mob extends Entity {
     @Override
     public void update() {
         super.update();
-        checkCollision(1, 0);
-        checkCollision(0, 1);
+        this.checkCollision(1, 0);
+        this.checkCollision(0, 1);
     }
 
     protected void checkCollision(int x, int y) {
-        int deltaX = velX * x;
-        int deltaY = velY * y;
+        int deltaX = this.velX * x;
+        int deltaY = this.velY * y;
 
         Rectangle r = this.getCollisionBox();
         r.translate(deltaX, deltaY);
 
-        if (!this.level.collides(r) || noclip) {
+        if (!this.level.collides(r) || this.noclip) {
             this.posX += deltaX;
             this.posY += deltaY;
         }

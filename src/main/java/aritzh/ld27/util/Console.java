@@ -30,7 +30,7 @@ public class Console {
         String command = JOptionPane.showInputDialog("Enter command:");
         this.game.getKeyboard().resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
         if (command == null || command.equals("")) return;
-        handleCommand(Command.matches(command), command);
+        this.handleCommand(Command.matches(command), command);
     }
 
     private void handleCommand(Command command, String args) {

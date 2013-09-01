@@ -22,7 +22,7 @@ public class Keyboard implements KeyListener, FocusListener {
      */
     @Override
     public void focusGained(FocusEvent e) {
-        focus = true;
+        this.focus = true;
     }
 
     /**
@@ -30,8 +30,8 @@ public class Keyboard implements KeyListener, FocusListener {
      */
     @Override
     public void focusLost(FocusEvent e) {
-        focus = false;
-        Arrays.fill(keys, false);
+        this.focus = false;
+        Arrays.fill(this.keys, false);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Keyboard implements KeyListener, FocusListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        keys[code] = true;
+        this.keys[code] = true;
     }
 
     /**
@@ -61,13 +61,13 @@ public class Keyboard implements KeyListener, FocusListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        keys[e.getKeyCode()] = false;
-        for (int i = 0; i < checked.size(); i++) if (checked.get(i).equals(e.getKeyCode())) checked.remove(i);
+        this.keys[e.getKeyCode()] = false;
+        for (int i = 0; i < this.checked.size(); i++) if (this.checked.get(i).equals(e.getKeyCode())) this.checked.remove(i);
     }
 
     public boolean isKeyTyped(int key) {
-        if (keys[key] && !checked.contains(key)) {
-            checked.add(key);
+        if (this.keys[key] && !this.checked.contains(key)) {
+            this.checked.add(key);
             return true;
         }
         return false;
@@ -78,23 +78,23 @@ public class Keyboard implements KeyListener, FocusListener {
     }
 
     public boolean isUp() {
-        return keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
+        return this.keys[KeyEvent.VK_W] || this.keys[KeyEvent.VK_UP];
     }
 
     public boolean isDown() {
-        return keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
+        return this.keys[KeyEvent.VK_S] || this.keys[KeyEvent.VK_DOWN];
     }
 
     public boolean isLeft() {
-        return keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
+        return this.keys[KeyEvent.VK_A] || this.keys[KeyEvent.VK_LEFT];
     }
 
     public boolean isRight() {
-        return keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
+        return this.keys[KeyEvent.VK_D] || this.keys[KeyEvent.VK_RIGHT];
     }
 
     public boolean hasFocus() {
-        return focus;
+        return this.focus;
     }
 
     public void resetKey(int keyCode) {

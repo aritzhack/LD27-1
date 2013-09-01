@@ -18,18 +18,18 @@ public class SpriteSheet {
     public SpriteSheet(String path) {
         try {
             this.image = ImageIO.read(this.getClass().getResource(path));
-            width = image.getWidth();
-            height = image.getHeight();
+            this.width = this.image.getWidth();
+            this.height = this.image.getHeight();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 }
