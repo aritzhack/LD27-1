@@ -87,7 +87,7 @@ public abstract class Mob extends Entity {
         int deltaX = velX * x;
         int deltaY = velY * y;
 
-        Rectangle r = this.getBoundingBox();
+        Rectangle r = this.getCollisionBox();
         r.translate(deltaX, deltaY);
 
         if (!this.level.collides(r) || noclip) {

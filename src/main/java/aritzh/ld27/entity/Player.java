@@ -41,7 +41,7 @@ public class Player extends Mob {
     }
 
     @Override
-    public Rectangle getBoundingBox() {
+    public Rectangle getCollisionBox() {
         return new Rectangle(this.posX + 6, this.posY + 27, this.width - 11, 2);
     }
 

@@ -24,6 +24,7 @@ public abstract class Entity {
     protected final int MAX_HEALTH;
     protected boolean dead;
     protected boolean god;
+    protected int damageCooldown = 0;
 
     /**
      * Constructs an Entity at (0,0) with the specified Sprite
@@ -109,7 +110,7 @@ public abstract class Entity {
         return health;
     }
 
-    public Rectangle getBoundingBox() {
+    public Rectangle getCollisionBox() {
         return new Rectangle(this.posX, this.posY, this.width, this.height);
     }
 
@@ -118,13 +119,17 @@ public abstract class Entity {
      * By default does nothing
      */
     public void update() {
+        Entity entity = this.level.collidesWithEntity(this);
+        if (this.damageCooldown == 0 && entity != null && entity instanceof IEnemy && !this.dead && !entity.dead) {
+            this.getHurtBy(entity);
+            this.damageCooldown = 2;
+        }
     }
 
     public void updatePerSecond() {
-        Entity entity = this.level.collidesWithEntity(this);
-        if (entity != null && entity instanceof IEnemy && !this.dead) {
-            entity.hurt(this);
-        }
+        if(this.damageCooldown>0) this.damageCooldown--;
+        if(this.damageCooldown<0) this.damageCooldown = 0;
+
     }
 
     /**
@@ -140,9 +145,13 @@ public abstract class Entity {
         this.noRender = !this.noRender;
     }
 
-    public void hurt(Entity entity) {
-        entity.setHealth(entity.getHealth() - 1);
-        System.out.println("Entity " + entity + " was hurt by " + this + ". Remaining health: " + entity.getHealth());
+    /**
+     * Hurt an entity, from another
+     * @param entity The entity that hurts
+     */
+    public void getHurtBy(Entity entity) {
+        this.setHealth(this.getHealth() - 1);
+        System.out.println("Entity " + this + " was hurt by " + entity + ". Remaining health: " + this.getHealth());
     }
 
     public boolean isDead() {

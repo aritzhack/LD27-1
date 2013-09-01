@@ -7,7 +7,6 @@ import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -19,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 
 /**
@@ -45,6 +45,7 @@ public class Game extends Canvas implements Runnable {
     private int fullScreenErrorTimeout;
     private Level level;
     private Player player;
+    private Console console;
 
 
     public Game(int width, int height, boolean applet, int scale) {
@@ -86,6 +87,7 @@ public class Game extends Canvas implements Runnable {
         this.level = Level.getLEVEL_1();
         this.player = new Player(this.level, this.keyboard);
         this.level.setPlayer(this.player);
+        this.console = new Console(this);
     }
 
     private void createWindow() {
@@ -199,7 +201,8 @@ public class Game extends Canvas implements Runnable {
         this.profiler.startSection("Render");
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
-            this.createBufferStrategy(3);
+            createBufferStrategy(3);
+            initFonts();
         } else {
             // Init
             Graphics g = bs.getDrawGraphics();
@@ -240,6 +243,20 @@ public class Game extends Canvas implements Runnable {
             if (this.running) bs.show();
         }
         this.profiler.endSection();
+    }
+
+    /**
+     * Used to remove the time used to load the font metrics (Slowed down over 2 seconds in some PCs)
+     */
+    private void initFonts(){
+        final Graphics g = this.getBufferStrategy().getDrawGraphics();
+        g.setFont(this.font100);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                g.getFontMetrics();
+            }
+        }).start();
     }
 
     private void update() {
@@ -287,24 +304,14 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void openConsole() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String command = JOptionPane.showInputDialog("Enter command:");
-                Game.this.keyboard.resetKey(KeyEvent.VK_F8); // reset the key, so that you can type it again
-                if (command == null) return;
-                command = command.trim().toLowerCase();
-                if (command.equals("noclip")) {
-                    boolean noclip = Game.this.level.getPlayer().toggleNoClip();
-                    JOptionPane.showConfirmDialog(Game.this.getParent(), "No-clip " + (noclip ? "enabled" : "disabled"), "No-clip toggled", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                } else if (command.equals("norender")) {
-                    Game.this.level.getPlayer().toggleNoRender();
-                } else if (command.equals("godmode") || command.equals("god")) {
-                    Game.this.level.getPlayer().toggleGod();
-                }
+        this.console.openConsole();
+    }
 
-            }
-        });
-        t.start();
+    public Level getLevel() {
+        return level;
+    }
+
+    public Keyboard getKeyboard() {
+        return keyboard;
     }
 }

@@ -111,7 +111,7 @@ public class Level {
         while (iter.hasNext()) {
             Entity e = iter.next();
             if (e.isDead() && !(e instanceof Player)) iter.remove();
-                //else if (e.isDead())  System.out.println("You DIED!");
+                else if (e.isDead())  System.out.println("You DIED!");
             else e.update();
         }
     }
@@ -183,7 +183,7 @@ public class Level {
 
     public Entity collidesWithEntity(Entity entity) {
         for (Entity e : this.entities) {
-            if (e != entity && e.getBoundingBox().intersects(entity.getBoundingBox())) return e;
+            if (e != entity && e.getCollisionBox().intersects(entity.getCollisionBox())) return e;
         }
         return null;
     }
