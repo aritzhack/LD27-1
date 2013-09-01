@@ -38,10 +38,6 @@ public class Level {
         this(Level.class.getResourceAsStream(path));
     }
 
-    public Level(File file) throws IOException {
-        this(new FileInputStream(file));
-    }
-
     public Level(InputStream iStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(iStream, Charset.defaultCharset()));
 
@@ -78,6 +74,10 @@ public class Level {
         iStream.close();
     }
 
+    public Level(File file) throws IOException {
+        this(new FileInputStream(file));
+    }
+
     public static void init() {
         try {
             Level.LEVEL_1 = new Level("/levels/level1.lvl");
@@ -87,6 +87,10 @@ public class Level {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addEntity(Entity entity) {
+        this.entities.add(entity);
     }
 
     public static Level getLEVEL_1() {
@@ -111,7 +115,7 @@ public class Level {
         while (iter.hasNext()) {
             Entity e = iter.next();
             if (e.isDead() && !(e instanceof Player)) iter.remove();
-                else if (e.isDead())  System.out.println("You DIED!");
+            else if (e.isDead()) System.out.println("You DIED!");
             else e.update();
         }
     }
@@ -175,10 +179,6 @@ public class Level {
         if (this.entities.contains(this.player)) this.entities.remove(this.player);
         this.player = player;
         this.entities.add(this.player);
-    }
-
-    public void addEntity(Entity entity) {
-        this.entities.add(entity);
     }
 
     public Entity collidesWithEntity(Entity entity) {

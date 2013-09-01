@@ -67,10 +67,6 @@ public class Render {
         drawPixels((fullScreen ? backgroundFull : background), 0, 0, width, height);
     }
 
-    public void clear() {
-        Arrays.fill(pixels, 0x00000000);
-    }
-
     public void drawPixels(int[] pixels, int xp, int yp, int width, int height) {
         if (pixels.length < width * height)
             throw new ArrayIndexOutOfBoundsException("The given array doesn't hold a image as big as " + width + "x" + height);
@@ -90,6 +86,10 @@ public class Render {
                 this.pixels[index] = ColorUtil.composite(newPixel, oldPixel);
             }
         }
+    }
+
+    public void clear() {
+        Arrays.fill(pixels, 0x00000000);
     }
 
     public void drawStringCenteredAt(Graphics g, String text, int x, int y, boolean shadow) {

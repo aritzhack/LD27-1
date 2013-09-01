@@ -3,6 +3,7 @@ package aritzh.ld27;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Render;
+import aritzh.ld27.util.Console;
 import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
 
@@ -39,7 +40,6 @@ public class Game extends Canvas implements Runnable {
     private Render currRender;
     private long timeInSeconds = 0, timer;
     private int frames, updates;
-
     private Dimension size;
     private boolean isFullscreen;
     private int fullScreenErrorTimeout;
@@ -248,7 +248,7 @@ public class Game extends Canvas implements Runnable {
     /**
      * Used to remove the time used to load the font metrics (Slowed down over 2 seconds in some PCs)
      */
-    private void initFonts(){
+    private void initFonts() {
         final Graphics g = this.getBufferStrategy().getDrawGraphics();
         g.setFont(this.font100);
         new Thread(new Runnable() {

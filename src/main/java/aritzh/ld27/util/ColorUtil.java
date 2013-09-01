@@ -36,24 +36,24 @@ public class ColorUtil {
         return getColor(finalAlpha, finalRed, finalGreen, finalBlue);
     }
 
-    public static int getAlpha(final int color) {
-        return (color >> ALPHA_SHIFT) & MASK;
-    }
-
-    public static int getBlue(final int color) {
-        return (color & MASK);
-    }
-
-    public static int getGreen(final int color) {
-        return (color >> GREEN_SHIFT) & MASK;
+    public static int getColor(final int alpha, final int red, final int green, final int blue) {
+        //if(alpha>MASK || red>MASK || green>MASK || blue>MASK) throw new IllegalArgumentException("All arguments must be less than or equal to 255 (0xFF)");
+        return (alpha << ALPHA_SHIFT) | (red << RED_SHIFT) | (green << GREEN_SHIFT) | blue;
     }
 
     public static int getRed(final int color) {
         return (color >> RED_SHIFT) & MASK;
     }
 
-    public static int getColor(final int alpha, final int red, final int green, final int blue) {
-        //if(alpha>MASK || red>MASK || green>MASK || blue>MASK) throw new IllegalArgumentException("All arguments must be less than or equal to 255 (0xFF)");
-        return (alpha << ALPHA_SHIFT) | (red << RED_SHIFT) | (green << GREEN_SHIFT) | blue;
+    public static int getGreen(final int color) {
+        return (color >> GREEN_SHIFT) & MASK;
+    }
+
+    public static int getBlue(final int color) {
+        return (color & MASK);
+    }
+
+    public static int getAlpha(final int color) {
+        return (color >> ALPHA_SHIFT) & MASK;
     }
 }

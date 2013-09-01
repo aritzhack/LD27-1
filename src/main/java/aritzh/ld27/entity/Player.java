@@ -46,6 +46,11 @@ public class Player extends Mob {
     }
 
     @Override
+    public void setHealth(int health) {
+        if (!god) super.setHealth(health);
+    }
+
+    @Override
     public void update() {
 
         if (input.isDown() && !input.isUp()) this.velY = 1;
@@ -57,10 +62,5 @@ public class Player extends Mob {
         else this.velX = 0;
 
         super.update();
-    }
-
-    @Override
-    public void setHealth(int health) {
-        if (!god) super.setHealth(health);
     }
 }

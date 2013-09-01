@@ -14,14 +14,13 @@ import java.awt.Rectangle;
  */
 public abstract class Entity {
 
+    protected final int MAX_HEALTH;
     protected Level level;
     protected int posX, posY;
     protected int width, height;
     protected Sprite sprite;
     protected boolean noRender;
     protected int health;
-
-    protected final int MAX_HEALTH;
     protected boolean dead;
     protected boolean god;
     protected int damageCooldown = 0;
@@ -98,18 +97,6 @@ public abstract class Entity {
         return sprite;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-        if (this.health < 0) {
-            this.health = 0;
-            this.dead = true;
-        }
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
     public Rectangle getCollisionBox() {
         return new Rectangle(this.posX, this.posY, this.width, this.height);
     }
@@ -126,9 +113,31 @@ public abstract class Entity {
         }
     }
 
+    /**
+     * Hurt an entity, from another
+     *
+     * @param entity The entity that hurts
+     */
+    public void getHurtBy(Entity entity) {
+        this.setHealth(this.getHealth() - 1);
+        System.out.println("Entity " + this + " was hurt by " + entity + ". Remaining health: " + this.getHealth());
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+        if (this.health < 0) {
+            this.health = 0;
+            this.dead = true;
+        }
+    }
+
     public void updatePerSecond() {
-        if(this.damageCooldown>0) this.damageCooldown--;
-        if(this.damageCooldown<0) this.damageCooldown = 0;
+        if (this.damageCooldown > 0) this.damageCooldown--;
+        if (this.damageCooldown < 0) this.damageCooldown = 0;
 
     }
 
@@ -143,15 +152,6 @@ public abstract class Entity {
 
     public void toggleNoRender() {
         this.noRender = !this.noRender;
-    }
-
-    /**
-     * Hurt an entity, from another
-     * @param entity The entity that hurts
-     */
-    public void getHurtBy(Entity entity) {
-        this.setHealth(this.getHealth() - 1);
-        System.out.println("Entity " + this + " was hurt by " + entity + ". Remaining health: " + this.getHealth());
     }
 
     public boolean isDead() {
