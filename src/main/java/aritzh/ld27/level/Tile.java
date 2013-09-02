@@ -21,6 +21,7 @@ public class Tile {
     public static final Tile TILE_CORNER_RT = new Tile(Sprite.cornerRT, 6, true);
     public static final Tile TILE_BORDER_L = new Tile(Sprite.borderL, 7, true);
     public static final Tile TILE_BORDER_R = new Tile(Sprite.borderR, 8, true);
+    public static final Tile TILE_CLOSED = new Tile(Sprite.floor, 9, true);
     private final Sprite sprite;
     private int id;
     private boolean solid;

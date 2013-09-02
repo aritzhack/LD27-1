@@ -1,12 +1,12 @@
 package aritzh.ld27.level;
 
-import aritzh.ld27.entity.BoxEnemy;
+import aritzh.ld27.entity.AlienEnemy;
 import aritzh.ld27.entity.Entity;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.render.Render;
-import aritzh.ld27.render.Sprite;
 import aritzh.ld27.render.SpriteSheet;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -32,6 +32,7 @@ public class Level {
     private final int height;
     public List<Entity> entities = new ArrayList<Entity>();
     private Tile[][] tiles;
+    private int[][] nodes;
     private Player player;
 
     public Level(String path) throws IOException {
@@ -81,8 +82,7 @@ public class Level {
     public static void init() {
         try {
             Level.LEVEL_1 = new Level("/levels/level1.lvl");
-            BoxEnemy e = new BoxEnemy(Sprite.enemy, Level.LEVEL_1);
-            e.setPosX(50);
+            Entity e = new AlienEnemy(Level.LEVEL_1).setPosX(50);
             Level.LEVEL_1.addEntity(e);
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,6 +153,7 @@ public class Level {
     }
 
     public boolean collides(Rectangle r) {
+        if(r.getMaxX()>= this.width*SpriteSheet.SPRITE_SIZE || r.getMaxY() >= this.height*SpriteSheet.SPRITE_SIZE) return true;
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 if (this.tiles[x][y].isSolid()) {
@@ -183,8 +184,36 @@ public class Level {
 
     public Entity collidesWithEntity(Entity entity) {
         for (Entity e : this.entities) {
-            if (e != entity && e.getCollisionBox().intersects(entity.getCollisionBox())) return e;
+            if (e != entity && e.getBoundingBox().intersects(entity.getBoundingBox())) return e;
         }
         return null;
+    }
+
+    private void recalculateNodes() {
+        this.nodes = new int[this.width][this.height];
+        for(int y = 0; y<this.height; y++){
+            for(int x = 0; x<this.width; x++){
+                this.nodes[x][y] = this.tiles[x][y].isSolid()?1:0;
+            }
+        }
+    }
+
+    public Point getTile(Entity e){
+        int x = (int) Math.floor((double) (e.getPosX() + e.getSprite().getWidth()/2) / (double) SpriteSheet.SPRITE_SIZE);
+        int y = (int) Math.floor((double) (e.getPosY()  + e.getSprite().getHeight()/2)/ (double) SpriteSheet.SPRITE_SIZE);
+        return new Point(x, y);
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public int[][] getNodes() {
+        if(this.nodes == null) this.recalculateNodes();
+        return this.nodes;
     }
 }

@@ -15,6 +15,7 @@ import java.awt.Rectangle;
 public class Player extends Mob {
 
     private static final int WIDTH = 16, HEIGHT = 31;
+    private static final Sprite SPRITE = new Sprite(2, 1, WIDTH, HEIGHT);
     private Keyboard input;
 
     /**
@@ -36,8 +37,9 @@ public class Player extends Mob {
      * @param posY  The Y coordinate at which the sprite will be drawn
      */
     public Player(Level level, Keyboard input, int posX, int posY, int maxHealth) {
-        super(new Sprite(2, 1, WIDTH, HEIGHT), level, posX, posY, maxHealth);
+        super(Player.SPRITE, level, posX, posY, maxHealth);
         this.input = input;
+        this.speed = 2.0;
     }
 
     @Override
@@ -46,8 +48,9 @@ public class Player extends Mob {
     }
 
     @Override
-    public void setHealth(int health) {
+    public Entity setHealth(int health) {
         if (!this.god) super.setHealth(health);
+        return this;
     }
 
     @Override

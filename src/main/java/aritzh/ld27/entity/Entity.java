@@ -66,8 +66,9 @@ public abstract class Entity {
      *
      * @param posX the new X coordinate of the entity
      */
-    public void setPosX(int posX) {
+    public Entity setPosX(int posX) {
         this.posX = posX;
+        return this;
     }
 
     /**
@@ -84,8 +85,9 @@ public abstract class Entity {
      *
      * @param posY the new Y coordinate of the entity
      */
-    public void setPosY(int posY) {
+    public Entity setPosY(int posY) {
         this.posY = posY;
+        return this;
     }
 
     /**
@@ -97,7 +99,19 @@ public abstract class Entity {
         return this.sprite;
     }
 
+    /**
+     * Get the rectangle used to handle collision with walls
+     * @return the rectangle representing the "feet" of the sprite
+     */
     public Rectangle getCollisionBox() {
+        return this.getBoundingBox();
+    }
+
+    /**
+     * Get the rectangle used to handle collision with other entities
+     * @return the rectangle representing the whole entity
+     */
+    public Rectangle getBoundingBox(){
         return new Rectangle(this.posX, this.posY, this.width, this.height);
     }
 
@@ -127,18 +141,18 @@ public abstract class Entity {
         return this.health;
     }
 
-    public void setHealth(int health) {
+    public Entity setHealth(int health) {
         this.health = health;
         if (this.health < 0) {
             this.health = 0;
             this.dead = true;
         }
+        return this;
     }
 
     public void updatePerSecond() {
         if (this.damageCooldown > 0) this.damageCooldown--;
         if (this.damageCooldown < 0) this.damageCooldown = 0;
-
     }
 
     /**
@@ -161,5 +175,9 @@ public abstract class Entity {
     public void toggleGod() {
         this.god = !this.god;
         if (this.god) this.health = this.MAX_HEALTH;
+    }
+
+    public Level getLevel() {
+        return this.level;
     }
 }

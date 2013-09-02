@@ -1,9 +1,12 @@
 package aritzh.ld27.entity;
 
+import aritzh.ld27.entity.ai.IAI;
 import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Sprite;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Mobile entity, has speed, therefore moving by itself
@@ -13,7 +16,9 @@ import java.awt.Rectangle;
  */
 public abstract class Mob extends Entity {
 
+    protected final List<IAI> ais = new ArrayList<IAI>();
     protected int velX, velY;
+    protected double speed = 1.0;
     protected boolean noclip = false;
 
     /**
@@ -79,13 +84,18 @@ public abstract class Mob extends Entity {
     @Override
     public void update(double delta) {
         super.update(delta);
+        for (IAI ai : this.ais) {
+            ai.apply(this);
+        }
         this.checkCollision(1, 0, delta);
         this.checkCollision(0, 1, delta);
     }
 
     protected void checkCollision(int x, int y, double delta) {
-        int deltaX = (int) (this.velX * x * delta);
-        int deltaY = (int) (this.velY * y * delta);
+        int deltaX = (int) (this.velX * x * delta * this.speed);
+        int deltaY = (int) (this.velY * y * delta * this.speed);
+
+        if (this.posX + deltaX < 0 || this.posY + deltaY < 0) return;
 
         Rectangle r = this.getCollisionBox();
         r.translate(deltaX, deltaY);
