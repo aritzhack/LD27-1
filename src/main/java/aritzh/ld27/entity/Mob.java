@@ -77,15 +77,15 @@ public abstract class Mob extends Entity {
      * By default does nothing
      */
     @Override
-    public void update() {
-        super.update();
-        this.checkCollision(1, 0);
-        this.checkCollision(0, 1);
+    public void update(double delta) {
+        super.update(delta);
+        this.checkCollision(1, 0, delta);
+        this.checkCollision(0, 1, delta);
     }
 
-    protected void checkCollision(int x, int y) {
-        int deltaX = this.velX * x;
-        int deltaY = this.velY * y;
+    protected void checkCollision(int x, int y, double delta) {
+        int deltaX = (int) (this.velX * x * delta);
+        int deltaY = (int) (this.velY * y * delta);
 
         Rectangle r = this.getCollisionBox();
         r.translate(deltaX, deltaY);

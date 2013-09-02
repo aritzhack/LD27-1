@@ -35,9 +35,6 @@ public class Render {
 
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
-
-        if (this.pixels.length < width * height)
-            throw new IllegalArgumentException("The given array doesn't hold an image as big as " + width + "x" + height);
     }
 
     public static void init(int width, int height, int scale) {

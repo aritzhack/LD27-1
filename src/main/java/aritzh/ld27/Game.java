@@ -162,7 +162,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / NS;
             lastTime = now;
             if (delta >= 1) {
-                this.update();
+                this.update(delta);
                 delta--;
                 this.updates++;
             }
@@ -259,7 +259,7 @@ public class Game extends Canvas implements Runnable {
         }).start();
     }
 
-    private void update() {
+    private void update(double delta) {
         this.profiler.startSection("Update");
 
         if (!this.keyboard.hasFocus()) {
@@ -267,7 +267,7 @@ public class Game extends Canvas implements Runnable {
             return;
         }
 
-        this.level.update();
+        this.level.update(delta);
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
             this.stop();

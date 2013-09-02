@@ -105,7 +105,7 @@ public abstract class Entity {
      * Called in the game's update method.
      * By default does nothing
      */
-    public void update() {
+    public void update(double delta) {
         Entity entity = this.level.collidesWithEntity(this);
         if (this.damageCooldown == 0 && entity != null && entity instanceof IEnemy && !this.dead && !entity.dead) {
             this.getHurtBy(entity);

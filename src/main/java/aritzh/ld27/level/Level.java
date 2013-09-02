@@ -110,13 +110,13 @@ public class Level {
         }
     }
 
-    public void update() {
+    public void update(double delta) {
         Iterator<Entity> iterator = this.entities.iterator();
         while (iterator.hasNext()) {
             Entity e = iterator.next();
             if (e.isDead() && !(e instanceof Player)) iterator.remove();
             else if (e.isDead()) System.out.println("You DIED!");
-            else e.update();
+            else e.update(delta);
         }
     }
 

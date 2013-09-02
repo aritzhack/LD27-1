@@ -51,7 +51,7 @@ public class Player extends Mob {
     }
 
     @Override
-    public void update() {
+    public void update(double delta) {
 
         if (this.input.isDown() && !this.input.isUp()) this.velY = 1;
         else if (this.input.isUp() && !this.input.isDown()) this.velY = -1;
@@ -61,6 +61,6 @@ public class Player extends Mob {
         else if (this.input.isRight() && !this.input.isLeft()) this.velX = 1;
         else this.velX = 0;
 
-        super.update();
+        super.update(delta);
     }
 }
