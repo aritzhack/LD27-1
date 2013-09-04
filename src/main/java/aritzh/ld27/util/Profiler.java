@@ -14,6 +14,29 @@ public class Profiler {
     Map<String, Long> elapsedTime = new HashMap<String, Long>();
     Stack<String> trace = new Stack<String>();
 
+    private static final Profiler DEFAULT;
+    private static final Map<String, Profiler> profilers = new HashMap<String, Profiler>();
+
+    static {
+        DEFAULT = new Profiler();
+    }
+
+    private Profiler() {
+
+    }
+
+    public static Profiler getInstance() {
+        return Profiler.DEFAULT;
+    }
+
+    public static Profiler getInstance(String name) {
+        if (!Profiler.profilers.containsKey(name)) {
+            Profiler p = new Profiler();
+            Profiler.profilers.put(name, p);
+            return p;
+        } else return Profiler.profilers.get(name);
+    }
+
     public synchronized void startSection(String section) {
         section = section.toLowerCase();
 
@@ -41,7 +64,7 @@ public class Profiler {
 
     public synchronized long getSectionTime(String section) {
         section = section.toLowerCase();
-        if (!this.elapsedTime.containsKey(section)) return 0;
+        if (!this.elapsedTime.containsKey(section)) return -1;
         return this.elapsedTime.get(section);
     }
 }

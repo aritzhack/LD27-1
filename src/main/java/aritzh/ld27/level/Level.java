@@ -1,8 +1,10 @@
 package aritzh.ld27.level;
 
+import aritzh.ld27.Game;
 import aritzh.ld27.entity.AlienEnemy;
 import aritzh.ld27.entity.Entity;
 import aritzh.ld27.entity.Player;
+import aritzh.ld27.entity.ai.astar.Node;
 import aritzh.ld27.render.Render;
 import aritzh.ld27.render.SpriteSheet;
 
@@ -28,18 +30,19 @@ import java.util.List;
 public class Level {
 
     private static Level LEVEL_1;
-    private final int width;
-    private final int height;
+
+    private int width, height;
     public List<Entity> entities = new ArrayList<Entity>();
     private Tile[][] tiles;
-    private int[][] nodes;
+    private Node[][] nodes;
     private Player player;
+    private Game game;
 
-    public Level(String path) throws IOException {
-        this(Level.class.getResourceAsStream(path));
+    public Level(String path, Game game) throws IOException {
+        this(Level.class.getResourceAsStream(path), game);
     }
 
-    public Level(InputStream iStream) throws IOException {
+    public Level(InputStream iStream, Game game) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(iStream, Charset.defaultCharset()));
 
         List<String> lines = new ArrayList<String>();
@@ -54,6 +57,7 @@ public class Level {
         }
 
         String[] firstLineTokens = lines.get(0).split(":");
+        this.game = game;
         this.width = Integer.parseInt(firstLineTokens[0]);
         this.height = Integer.parseInt(firstLineTokens[1]);
 
@@ -75,13 +79,13 @@ public class Level {
         iStream.close();
     }
 
-    public Level(File file) throws IOException {
-        this(new FileInputStream(file));
+    public Level(File file, Game game) throws IOException {
+        this(new FileInputStream(file), game);
     }
 
-    public static void init() {
+    public static void init(Game game) {
         try {
-            Level.LEVEL_1 = new Level("/levels/level1.lvl");
+            Level.LEVEL_1 = new Level("/levels/level1.lvl", game);
             Entity e = new AlienEnemy(Level.LEVEL_1).setPosX(50);
             Level.LEVEL_1.addEntity(e);
         } catch (IOException e) {
@@ -153,7 +157,8 @@ public class Level {
     }
 
     public boolean collides(Rectangle r) {
-        if(r.getMaxX()>= this.width*SpriteSheet.SPRITE_SIZE || r.getMaxY() >= this.height*SpriteSheet.SPRITE_SIZE) return true;
+        if (r.getMaxX() >= this.width * SpriteSheet.SPRITE_SIZE || r.getMaxY() >= this.height * SpriteSheet.SPRITE_SIZE)
+            return true;
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 if (this.tiles[x][y].isSolid()) {
@@ -190,17 +195,17 @@ public class Level {
     }
 
     private void recalculateNodes() {
-        this.nodes = new int[this.width][this.height];
-        for(int y = 0; y<this.height; y++){
-            for(int x = 0; x<this.width; x++){
-                this.nodes[x][y] = this.tiles[x][y].isSolid()?1:0;
+        this.nodes = new Node[this.width][this.height];
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                this.nodes[x][y] = new Node(x, y, this.tiles[x][y].isSolid());
             }
         }
     }
 
-    public Point getTile(Entity e){
-        int x = (int) Math.floor((double) (e.getPosX() + e.getSprite().getWidth()/2) / (double) SpriteSheet.SPRITE_SIZE);
-        int y = (int) Math.floor((double) (e.getPosY()  + e.getSprite().getHeight()/2)/ (double) SpriteSheet.SPRITE_SIZE);
+    public Point getTile(Entity e) {
+        int x = (int) Math.floor((double) (e.getPosX() + e.getSprite().getWidth() / 2) / (double) SpriteSheet.SPRITE_SIZE);
+        int y = (int) Math.floor((double) (e.getPosY() + e.getSprite().getHeight() / 2) / (double) SpriteSheet.SPRITE_SIZE);
         return new Point(x, y);
     }
 
@@ -212,8 +217,12 @@ public class Level {
         return this.height;
     }
 
-    public int[][] getNodes() {
-        if(this.nodes == null) this.recalculateNodes();
+    public Node[][] getNodes() {
+        if (this.nodes == null) this.recalculateNodes();
         return this.nodes;
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 }

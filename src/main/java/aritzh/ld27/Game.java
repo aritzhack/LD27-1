@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable {
     private final Font font100;
     private JFrame frame;
     private Thread thread;
-    private Profiler profiler = new Profiler();
+    private Profiler profiler = Profiler.getInstance();
     private boolean running;
     private Render currRender;
     private long timeInSeconds = 0, timer;
@@ -82,7 +82,7 @@ public class Game extends Canvas implements Runnable {
 
     private void reload() {
         Render.init();
-        Level.init();
+        Level.init(this);
         this.currRender = (this.isFullscreen ? Render.fullRender : Render.normalRender);
         this.level = Level.getLEVEL_1();
         this.player = new Player(this.level, this.keyboard);
@@ -171,7 +171,7 @@ public class Game extends Canvas implements Runnable {
             this.frames++;
             if (System.currentTimeMillis() - this.timer > 1000) {
                 this.updatePerSecond();
-                System.out.println(this.updates + "ups\t|\t" + this.frames + "fps\t|\tUpdateTime: " + this.profiler.getSectionTime("update") + "\t|\tRenderTime: " + this.profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + this.profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + this.timeInSeconds);
+                System.out.println(this.updates + "ups\t|\t" + this.frames + "fps\t|\tUpdateTime: " + this.profiler.getSectionTime("update") + "\t|\tRenderTime: " + this.profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + this.profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + this.timeInSeconds + "\t|\tLast A*: " + this.profiler.getSectionTime("A* AI"));
                 this.timer += 1000;
                 this.updates = 0;
                 this.frames = 0;
