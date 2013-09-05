@@ -92,8 +92,8 @@ public abstract class Mob extends Entity {
     }
 
     protected void checkCollision(int x, int y, double delta) {
-        int deltaX = (int) (this.velX * x * delta * this.speed);
-        int deltaY = (int) (this.velY * y * delta * this.speed);
+        int deltaX = (int) Math.round(this.velX * x * delta * this.speed);
+        int deltaY = (int) Math.round(this.velY * y * delta * this.speed);
 
         if (this.posX + deltaX < 0 || this.posY + deltaY < 0) return;
 

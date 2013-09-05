@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>LateLD27</groupId>
+	<groupId>aritzh</groupId>
 	<artifactId>LateLD27</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>A Slick2d game</name>
 
@@ -14,6 +14,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>aritzh</groupId>
+			<artifactId>Java2DEngine</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

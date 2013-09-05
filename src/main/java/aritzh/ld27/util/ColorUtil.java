@@ -37,7 +37,6 @@ public class ColorUtil {
     }
 
     public static int getColor(final int alpha, final int red, final int green, final int blue) {
-        //if(alpha>MASK || red>MASK || green>MASK || blue>MASK) throw new IllegalArgumentException("All arguments must be less than or equal to 255 (0xFF)");
         return (alpha << ALPHA_SHIFT) | (red << RED_SHIFT) | (green << GREEN_SHIFT) | blue;
     }
 

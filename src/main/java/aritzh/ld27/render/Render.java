@@ -16,7 +16,14 @@ import java.util.Arrays;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Render {
+    
+    /**
+     * @deprecated Will be removed when separating the engine and the game
+     */
     public static Render fullRender;
+    /**
+     * @deprecated Will be removed when separating the engine and the game
+     */
     public static Render normalRender;
     private static int nWidth;
     private static int nHeight;
@@ -28,6 +35,12 @@ public class Render {
     private int[] pixels;
     private BufferedImage image;
 
+    /**
+     * Creates a render with the specified size
+     *
+     * @param width  The width of the renderer
+     * @param height The height of the renderer
+     */
     public Render(int width, int height) {
 
         this.width = width;
@@ -37,12 +50,18 @@ public class Render {
         this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
     }
 
+    /**
+     * @deprecated Will be removed when separating the engine and the game
+     */
     public static void init(int width, int height, int scale) {
         Render.nWidth = width;
         Render.nHeight = height;
         Render.scale = scale;
     }
 
+    /**
+     * @deprecated Will be removed when separating the engine and the game
+     */
     public static void init() {
         normalRender = new Render(nWidth, nHeight);
         fullRender = new Render(nWidth * scale, nHeight * scale);
@@ -64,6 +83,18 @@ public class Render {
         this.drawPixels((fullScreen ? backgroundFull : background), 0, 0, this.width, this.height);
     }
 
+    /**
+     * Composites the pixels inside {@code pixels} with the current pixels. <br />
+     * There is an offset of {@code xp} horizontally and {@code yp} vertically.
+     * The amount of pixels drawn is cut off at {@code width} and {@code height} <br />
+     * The pixels will be taken as follows: {@code pixels[x + (y * this.width)]} where x and y are the iteration indexes
+     *
+     * @param pixels The integer array containing the colors
+     * @param xp     The horizontal offset from the left
+     * @param yp     The vertical offset from the top
+     * @param width  The maximum amount of pixels composited horizontally
+     * @param height The maximum amount of pixels composited vertically
+     */
     public void drawPixels(int[] pixels, int xp, int yp, int width, int height) {
         if (pixels.length < width * height)
             throw new ArrayIndexOutOfBoundsException("The given array doesn't hold a image as big as " + width + "x" + height);
@@ -85,10 +116,22 @@ public class Render {
         }
     }
 
+    /**
+     * Sets all pixels to 0 (Transparent black)
+     */
     public void clear() {
         Arrays.fill(this.pixels, 0x00000000);
     }
 
+    /**
+     * Draws a String centered at the specified location
+     *
+     * @param g      The {@link Graphics} instance into which the String will be drawn
+     * @param text   The String to render
+     * @param x      The X coordinate to which the String will be centered at
+     * @param y      The Y coordinate to which the String will be centered at
+     * @param shadow Whether the string should be rendered with shadow or not
+     */
     public void drawStringCenteredAt(Graphics g, String text, int x, int y, boolean shadow) {
         FontMetrics m = g.getFontMetrics();
 
@@ -105,27 +148,86 @@ public class Render {
 
     }
 
-    public void drawStringAt(Graphics g, String text, int x, int y) {
+    /**
+     * Draws a String with the top-left corner at the specified location
+     *
+     * @param g      The {@link Graphics} instance into which the String will be drawn
+     * @param text   The String to render
+     * @param x      The X coordinate of the top-left corner at which the String will be drawn
+     * @param y      The Y coordinate of the top-left corner at which the String will be drawn
+     * @param shadow Whether the string should be rendered with shadow or not
+     */
+    public void drawStringAt(Graphics g, String text, int x, int y, boolean shadow) {
         FontMetrics m = g.getFontMetrics();
-        g.drawString(text, x, y + m.getAscent() - m.getDescent());
+
+        int yy = y + m.getAscent() - m.getDescent();
+
+        if (shadow) {
+            Color c = g.getColor();
+            g.setColor(Color.BLACK);
+            g.drawString(text, x + 3, yy + 3);
+            g.setColor(c);
+        }
+
+        g.drawString(text, x, yy);
     }
 
+    /**
+     * Draws a sprite at the specified location
+     *
+     * @param s  The sprite to draw
+     * @param xp The X position
+     * @param yp The Y position
+     */
     public void renderSprite(Sprite s, int xp, int yp) {
         this.drawPixels(s.getPixels(), xp, yp, s.getWidth(), s.getHeight());
     }
 
+    /**
+     * Sets a particular pixel to the specified color.
+     * <br />
+     * The format of the color integer is as follows: 0xAARRGGBB
+     * Where:
+     * <ol>
+     * <li>AA is the alpha component (0-255)</li>
+     * <li>RR is the red component (0-255)</li>
+     * <li>GG is the green component (0-255)</li>
+     * <li>BB is the blue component (0-255)</li>
+     * </ol>
+     *
+     * @param x     The X coordinate of the pixel
+     * @param y     The Y coordinate of the pixel
+     * @param color The color to set the pixel to.
+     * @see ColorUtil ColorUtil - Utility class, specific to this format
+     */
     public void setPixel(int x, int y, int color) {
         this.pixels[x + y * this.width] = color;
     }
 
+    /**
+     * Returns the width of the renderer
+     *
+     * @return the width of the renderer
+     */
     public int getWidth() {
         return this.width;
     }
 
+    /**
+     * Returns the height of the renderer
+     *
+     * @return the height of the renderer
+     */
     public int getHeight() {
         return this.height;
     }
 
+    /**
+     * Returns the image behind this renderer. Useful to get the {@link java.awt.image.BufferedImage#getGraphics() image graphics}
+     * in order to render rectangles, instead of drawing pixel-per-pixel
+     *
+     * @return the image behind this renderer.
+     */
     public BufferedImage getImage() {
         return this.image;
     }

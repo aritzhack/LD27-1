@@ -101,6 +101,7 @@ public abstract class Entity {
 
     /**
      * Get the rectangle used to handle collision with walls
+     *
      * @return the rectangle representing the "feet" of the sprite
      */
     public Rectangle getCollisionBox() {
@@ -109,9 +110,10 @@ public abstract class Entity {
 
     /**
      * Get the rectangle used to handle collision with other entities
+     *
      * @return the rectangle representing the whole entity
      */
-    public Rectangle getBoundingBox(){
+    public Rectangle getBoundingBox() {
         return new Rectangle(this.posX, this.posY, this.width, this.height);
     }
 
