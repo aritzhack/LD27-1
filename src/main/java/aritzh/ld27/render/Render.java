@@ -1,6 +1,6 @@
 package aritzh.ld27.render;
 
-import aritzh.ld27.util.ColorUtil;
+import aritzh.ld27.util.ARGBColorUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
+ * Class used to aid rendering to the screen
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
@@ -111,7 +112,7 @@ public class Render {
                 int newPixel = pixels[x + y * width];
                 int oldPixel = this.pixels[index];
                 if (newPixel >>> 24 == 0) continue;
-                this.pixels[index] = ColorUtil.composite(newPixel, oldPixel);
+                this.pixels[index] = ARGBColorUtil.composite(newPixel, oldPixel);
             }
         }
     }
@@ -185,20 +186,10 @@ public class Render {
 
     /**
      * Sets a particular pixel to the specified color.
-     * <br />
-     * The format of the color integer is as follows: 0xAARRGGBB
-     * Where:
-     * <ol>
-     * <li>AA is the alpha component (0-255)</li>
-     * <li>RR is the red component (0-255)</li>
-     * <li>GG is the green component (0-255)</li>
-     * <li>BB is the blue component (0-255)</li>
-     * </ol>
-     *
      * @param x     The X coordinate of the pixel
      * @param y     The Y coordinate of the pixel
      * @param color The color to set the pixel to.
-     * @see ColorUtil ColorUtil - Utility class, specific to this format
+     * @see aritzh.ld27.util.ARGBColorUtil ARGBColorUtil - Utility class, specific to this format
      */
     public void setPixel(int x, int y, int color) {
         this.pixels[x + y * this.width] = color;

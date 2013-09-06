@@ -3,9 +3,13 @@ package aritzh.ld27;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Render;
-import aritzh.ld27.util.Console;
+import aritzh.ld27.util.console.Console;
 import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
+import aritzh.ld27.util.console.commands.GodModeCommand;
+import aritzh.ld27.util.console.commands.HelpCommand;
+import aritzh.ld27.util.console.commands.NoClipCommand;
+import aritzh.ld27.util.console.commands.NoRenderCommand;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -88,6 +92,11 @@ public class Game extends Canvas implements Runnable {
         this.player = new Player(this.level, this.keyboard);
         this.level.setPlayer(this.player);
         this.console = new Console(this);
+
+        this.console.registerCommand(new GodModeCommand());
+        this.console.registerCommand(new NoClipCommand());
+        this.console.registerCommand(new NoRenderCommand());
+        this.console.registerCommand(new HelpCommand());
     }
 
     private void createWindow() {
@@ -313,5 +322,9 @@ public class Game extends Canvas implements Runnable {
 
     public Keyboard getKeyboard() {
         return this.keyboard;
+    }
+
+    public Console getConsole() {
+        return this.console;
     }
 }
