@@ -6,7 +6,7 @@ import aritzh.ld27.Game;
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class HelpCommand implements ICommand {
+public class HelpCommand implements ICommand<Game> {
 
     /**
      * Runs the command represented by the implementation
@@ -16,10 +16,10 @@ public class HelpCommand implements ICommand {
      * @return If a message wants to be printed, a {@code String}, else {@code null}
      */
     @Override
-    public String run(Game game, String command) {
+    public String[] run(Game game, String command) {
         String[] args = command.split(" ");
-        if(args.length < 2) return this.getHelp();
-        else return game.getConsole().getMatchingCommand(args[1]).getHelp();
+        if (args.length < 2) return new String[]{this.getHelp(), "Help"};
+        else return new String[]{game.getConsole().getMatchingCommand(args[1]).getHelp(), "Help"};
     }
 
     /**
@@ -43,6 +43,6 @@ public class HelpCommand implements ICommand {
     @Override
     public String getHelp() {
         return "Shows help for a specific command:\n" +
-                "Usage: help <command>";
+                "Usage: help " + FormatHelper.ITALIC + FormatHelper.BOLD + FormatHelper.OLIVE + "<command>";
     }
 }

@@ -2,6 +2,7 @@ package aritzh.ld27.util;
 
 /**
  * Utility class to deal with ARGB color format
+ *
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
@@ -48,7 +49,7 @@ public class ARGBColorUtil {
         double alpha1 = getAlpha(color1) / 256.0;
         double alpha2 = getAlpha(color2) / 256.0;
 
-        if (alpha1 == 0xFF || alpha2 == 0) return color1;
+        if (alpha1 == 1.0 || alpha2 == 0) return color1;
         else if (alpha1 == 0) return color2;
 
         int red1 = getRed(color1);
@@ -85,6 +86,7 @@ public class ARGBColorUtil {
 
     /**
      * Returns the red channel of the color
+     *
      * @param color The color to get the red channel of
      * @return The red channel of the color
      */
@@ -94,6 +96,7 @@ public class ARGBColorUtil {
 
     /**
      * Returns the green channel of the color
+     *
      * @param color The color to get the green channel of
      * @return The green channel of the color
      */
@@ -103,6 +106,7 @@ public class ARGBColorUtil {
 
     /**
      * Returns the blue channel of the color
+     *
      * @param color The color to get the blue channel of
      * @return The blue channel of the color
      */
@@ -112,6 +116,7 @@ public class ARGBColorUtil {
 
     /**
      * Returns the alpha channel of the color
+     *
      * @param color The color to get the alpha channel of
      * @return The alpha channel of the color
      */

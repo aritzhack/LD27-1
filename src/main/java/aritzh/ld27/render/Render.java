@@ -13,11 +13,12 @@ import java.util.Arrays;
 
 /**
  * Class used to aid rendering to the screen
+ *
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
 public class Render {
-    
+
     /**
      * @deprecated Will be removed when separating the engine and the game
      */
@@ -186,6 +187,7 @@ public class Render {
 
     /**
      * Sets a particular pixel to the specified color.
+     *
      * @param x     The X coordinate of the pixel
      * @param y     The Y coordinate of the pixel
      * @param color The color to set the pixel to.

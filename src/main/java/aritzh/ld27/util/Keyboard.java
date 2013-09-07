@@ -62,7 +62,8 @@ public class Keyboard implements KeyListener, FocusListener {
     @Override
     public void keyReleased(KeyEvent e) {
         this.keys[e.getKeyCode()] = false;
-        for (int i = 0; i < this.checked.size(); i++) if (this.checked.get(i).equals(e.getKeyCode())) this.checked.remove(i);
+        for (int i = 0; i < this.checked.size(); i++)
+            if (this.checked.get(i).equals(e.getKeyCode())) this.checked.remove(i);
     }
 
     public boolean isKeyTyped(int key) {

@@ -3,9 +3,9 @@ package aritzh.ld27;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Render;
-import aritzh.ld27.util.console.Console;
 import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
+import aritzh.ld27.util.console.Console;
 import aritzh.ld27.util.console.commands.GodModeCommand;
 import aritzh.ld27.util.console.commands.HelpCommand;
 import aritzh.ld27.util.console.commands.NoClipCommand;
@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
     private int fullScreenErrorTimeout;
     private Level level;
     private Player player;
-    private Console console;
+    private Console<Game> console;
 
 
     public Game(int width, int height, boolean applet, int scale) {
@@ -91,7 +91,7 @@ public class Game extends Canvas implements Runnable {
         this.level = Level.getLEVEL_1();
         this.player = new Player(this.level, this.keyboard);
         this.level.setPlayer(this.player);
-        this.console = new Console(this);
+        this.console = new Console<Game>(this);
 
         this.console.registerCommand(new GodModeCommand());
         this.console.registerCommand(new NoClipCommand());
@@ -288,8 +288,9 @@ public class Game extends Canvas implements Runnable {
             System.out.println("Reloaded");
         }
 
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_F8)) {
-            this.openConsole();
+        if (this.keyboard.isKeyTyped(KeyEvent.VK_F8) && !this.console.isOpen()) {
+            this.console.openConsole();
+            this.keyboard.resetKey(KeyEvent.VK_F8);
         }
 
         if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
@@ -312,10 +313,6 @@ public class Game extends Canvas implements Runnable {
         this.isFullscreen = !this.isFullscreen;
     }
 
-    private void openConsole() {
-        this.console.openConsole();
-    }
-
     public Level getLevel() {
         return this.level;
     }
@@ -324,7 +321,7 @@ public class Game extends Canvas implements Runnable {
         return this.keyboard;
     }
 
-    public Console getConsole() {
+    public Console<Game> getConsole() {
         return this.console;
     }
 }

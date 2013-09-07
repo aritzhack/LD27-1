@@ -6,10 +6,10 @@ import aritzh.ld27.Game;
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
-public class NoClipCommand implements ICommand{
+public class NoClipCommand implements ICommand<Game> {
 
     @Override
-    public String run(Game game, String command) {
+    public String[] run(Game game, String command) {
         game.getLevel().getPlayer().toggleNoClip();
         return null;
     }
