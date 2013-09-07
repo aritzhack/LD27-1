@@ -10,6 +10,7 @@ public interface IAI {
 
     public static final IAI RANDOM_MOVEMENT = new RandomMovementAI();
     public static final IAI TO_PLAYER_STUPID = new ToPlayerStupidAI();
+    public static final IAI TO_PLAYER_INTELLIGENT = new ToPlayerIntelligent();
 
     public void apply(Mob m);
 }

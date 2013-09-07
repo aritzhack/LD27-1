@@ -39,7 +39,7 @@ public class Player extends Mob {
     public Player(Level level, Keyboard input, int posX, int posY, int maxHealth) {
         super(Player.SPRITE, level, posX, posY, maxHealth);
         this.input = input;
-        this.speed = 2.0;
+        this.speed = 1.5;
     }
 
     @Override

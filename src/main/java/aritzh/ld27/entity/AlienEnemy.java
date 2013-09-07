@@ -19,7 +19,7 @@ public class AlienEnemy extends Mob implements IEnemy {
      */
     public AlienEnemy(Level level) {
         super(AlienEnemy.SPRITE, level);
-        this.ais.add(IAI.TO_PLAYER_STUPID);
+        this.ais.add(IAI.TO_PLAYER_INTELLIGENT);
     }
 
 
