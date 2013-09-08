@@ -1,7 +1,7 @@
 package aritzh.ld27.entity;
 
 import aritzh.ld27.level.Level;
-import aritzh.ld27.render.Render;
+import aritzh.ld27.render.IRender;
 import aritzh.ld27.render.Sprite;
 
 import java.awt.Rectangle;
@@ -162,8 +162,8 @@ public abstract class Entity {
      *
      * @param render The Render used to render the Entity
      */
-    public void render(Render render) {
-        if (!this.noRender) render.renderSprite(this.sprite, this.posX, this.posY);
+    public void render(IRender render) {
+        if (!this.noRender) render.draw(this.sprite, this.posX, this.posY);
     }
 
     public void toggleNoRender() {

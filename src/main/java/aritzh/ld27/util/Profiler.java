@@ -108,10 +108,11 @@ public class Profiler {
      * @param section The name of the section
      */
     public synchronized void endSection(String section) {
+        long now = System.nanoTime();
         section = section.toLowerCase();
         if (!this.startTime.containsKey(section))
             throw new IllegalArgumentException("Section \"" + section + "\" hasn't been started!");
-        long elapsed = System.nanoTime() - this.startTime.remove(section);
+        long elapsed = now - this.startTime.remove(section);
         this.elapsedTime.put(section, elapsed);
         if (this.verbose) System.out.println("Section " + section + " lasted " + elapsed + "ns");
     }

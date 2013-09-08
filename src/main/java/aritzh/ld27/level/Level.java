@@ -5,7 +5,7 @@ import aritzh.ld27.entity.AlienEnemy;
 import aritzh.ld27.entity.Entity;
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.entity.ai.astar.Node;
-import aritzh.ld27.render.Render;
+import aritzh.ld27.render.IRender;
 import aritzh.ld27.render.SpriteSheet;
 
 import java.awt.Point;
@@ -101,10 +101,10 @@ public class Level {
         return LEVEL_1;
     }
 
-    public void render(Render render) {
+    public void render(IRender render) {
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-                render.renderSprite(this.tiles[x][y].getSprite(), x * SpriteSheet.SPRITE_SIZE, y * SpriteSheet.SPRITE_SIZE);
+                render.draw(this.tiles[x][y].getSprite(), x * SpriteSheet.SPRITE_SIZE, y * SpriteSheet.SPRITE_SIZE);
             }
         }
         this.player.render(render);

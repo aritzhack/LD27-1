@@ -2,6 +2,7 @@ package aritzh.ld27;
 
 import aritzh.ld27.entity.Player;
 import aritzh.ld27.level.Level;
+import aritzh.ld27.render.IRender;
 import aritzh.ld27.render.Render;
 import aritzh.ld27.util.Keyboard;
 import aritzh.ld27.util.Profiler;
@@ -11,6 +12,7 @@ import aritzh.ld27.util.console.commands.HelpCommand;
 import aritzh.ld27.util.console.commands.NoClipCommand;
 import aritzh.ld27.util.console.commands.NoRenderCommand;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import java.awt.Canvas;
@@ -25,6 +27,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * @author Aritz Lopez
@@ -32,31 +36,45 @@ import java.awt.image.BufferStrategy;
  */
 public class Game extends Canvas implements Runnable {
     private final boolean applet;
-    private final Keyboard keyboard;
     private final boolean isFullscreenSupported;
-    private final Font font32;
-    private final Font font64;
-    private final Font font100;
+    private final int width, height, scale;
+    private final Keyboard keyboard;
+    private final Font font32, font64, font100;
+    private final IRender normalRender, fullRender;
+    private final int[] background, fullBackground;
+    private boolean running, isFullscreen;
+    private long timeInSeconds = 0;
+    private int frames, updates, fullScreenErrorTimeout;
     private JFrame frame;
     private Thread thread;
     private Profiler profiler = Profiler.getInstance();
-    private boolean running;
-    private Render currRender;
-    private long timeInSeconds = 0, timer;
-    private int frames, updates;
     private Dimension size;
-    private boolean isFullscreen;
-    private int fullScreenErrorTimeout;
     private Level level;
     private Player player;
     private Console<Game> console;
-
+    private IRender currRender;
 
     public Game(int width, int height, boolean applet, int scale) {
+        this.width = width;
+        this.height = height;
+        this.scale = scale;
         this.size = new Dimension(width * scale, height * scale);
 
         this.keyboard = new Keyboard();
         this.applet = applet;
+
+        this.normalRender = new Render(this.width, this.height);
+        this.fullRender = new Render(this.width * this.scale, this.height * this.scale);
+
+        try {
+            BufferedImage image = ImageIO.read(Game.class.getResourceAsStream("/textures/background.png"));
+            this.background = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
+            image = ImageIO.read(Game.class.getResourceAsStream("/textures/background2.png"));
+            this.fullBackground = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ExceptionInInitializerError("Could not load the required resources");
+        }
 
         this.setFont(this.font32 = new Font("Consola", Font.PLAIN, 32));
         this.font64 = new Font("Consola", Font.PLAIN, 64);
@@ -75,19 +93,17 @@ public class Game extends Canvas implements Runnable {
             }
         });
 
-        Render.init(width, height, scale);
-
         this.isFullscreenSupported = !applet && GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().isFullScreenSupported();
 
         if (!applet) this.createWindow();
 
-        this.reload();
+        this.init();
     }
 
-    private void reload() {
-        Render.init();
+    private void init() {
+
         Level.init(this);
-        this.currRender = (this.isFullscreen ? Render.fullRender : Render.normalRender);
+        this.currRender = (this.isFullscreen ? this.fullRender : this.normalRender);
         this.level = Level.getLEVEL_1();
         this.player = new Player(this.level, this.keyboard);
         this.level.setPlayer(this.player);
@@ -157,7 +173,7 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run() {
         long lastTime = System.nanoTime();
-        this.timer = System.currentTimeMillis();
+        long timer = System.currentTimeMillis();
 
         final double NS = 1000000000.0 / 60.0;
         double delta = 0;
@@ -178,10 +194,10 @@ public class Game extends Canvas implements Runnable {
             this.render();
 
             this.frames++;
-            if (System.currentTimeMillis() - this.timer > 1000) {
+            if (System.currentTimeMillis() - timer > 1000) {
                 this.updatePerSecond();
                 System.out.println(this.updates + "ups\t|\t" + this.frames + "fps\t|\tUpdateTime: " + this.profiler.getSectionTime("update") + "\t|\tRenderTime: " + this.profiler.getSectionTime("render") + "\t|\tMainLoopTime: " + this.profiler.getSectionTime("mainloop") + "\t|\tTotalTime: " + this.timeInSeconds + "\t|\tLast A*: " + this.profiler.getSectionTime("A* AI"));
-                this.timer += 1000;
+                timer += 1000;
                 this.updates = 0;
                 this.frames = 0;
                 if (this.fullScreenErrorTimeout > 0) this.fullScreenErrorTimeout--;
@@ -225,7 +241,7 @@ public class Game extends Canvas implements Runnable {
             this.currRender.clear();
 
             // Draw
-            this.currRender.renderBackground(this.isFullscreen);
+            this.currRender.draw(0, 0, this.currRender.getWidth(), this.currRender.getHeight(), this.isFullscreen ? this.fullBackground : this.background);
 
             this.level.render(this.currRender);
 
@@ -255,7 +271,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     /**
-     * Used to remove the time used to load the font metrics (Slowed down over 2 seconds in some PCs)
+     * Used to lighten the time spent to load the font metrics (Slowed down over 2 seconds in some PCs)
      */
     private void initFonts() {
         final Graphics g = this.getBufferStrategy().getDrawGraphics();
@@ -265,37 +281,26 @@ public class Game extends Canvas implements Runnable {
             public void run() {
                 g.getFontMetrics();
             }
-        }).start();
+        }, "FontMetrics caching").start();
     }
 
     private void update(double delta) {
         this.profiler.startSection("Update");
 
-        if (!this.keyboard.hasFocus()) {
-            this.profiler.endSection();
-            return;
-        }
+        if (this.keyboard.hasFocus()) {
+            this.level.update(delta);
 
-        this.level.update(delta);
-
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
-            this.stop();
-        }
-
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_R)) {
-            System.out.println("Reloading...");
-            this.reload();
-            System.out.println("Reloaded");
-        }
-
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_F8) && !this.console.isOpen()) {
-            this.console.openConsole();
-            this.keyboard.resetKey(KeyEvent.VK_F8);
-        }
-
-        if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
-            if (this.isFullscreenSupported) this.toggleFullscreen();
-            else this.fullScreenErrorTimeout = 4;
+            if (this.keyboard.isKeyTyped(KeyEvent.VK_ESCAPE)) {
+                this.stop();
+            }
+            if (this.keyboard.isKeyTyped(KeyEvent.VK_F8) && !this.console.isOpen()) {
+                this.console.openConsole();
+                this.keyboard.resetKey(KeyEvent.VK_F8);
+            }
+            if (this.keyboard.isKeyTyped(KeyEvent.VK_F11)) {
+                if (this.isFullscreenSupported) this.toggleFullscreen();
+                else this.fullScreenErrorTimeout = 4;
+            }
         }
 
         this.profiler.endSection();
@@ -304,10 +309,10 @@ public class Game extends Canvas implements Runnable {
     private void toggleFullscreen() {
         if (!this.isFullscreen) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this.frame);
-            this.currRender = Render.fullRender;
+            this.currRender = this.fullRender;
         } else {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-            this.currRender = Render.normalRender;
+            this.currRender = this.normalRender;
         }
 
         this.isFullscreen = !this.isFullscreen;

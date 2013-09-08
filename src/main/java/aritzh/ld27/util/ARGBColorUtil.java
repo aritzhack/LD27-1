@@ -39,36 +39,47 @@ public class ARGBColorUtil {
      * <li>GG is the green component (0-255)</li>
      * <li>BB is the blue component (0-255)</li>
      * </ol>
+     * NOTE: The source of this method is quite obscure, but it's done this way because it's performance-critical (this method could be run thousands of times per second!)<br />
+     * The code (unobscured) does this: <br /><br />
+     * <code>
+     * double alpha1 = getAlpha(foreground) / 256.0;<br />
+     * double alpha2 = getAlpha(background) / 256.0;<br />
+     * <br />
+     * if (alpha1 == 1.0 || alpha2 == 0) return foreground;<br />
+     * else if (alpha1 == 0) return background;<br />
+     * <br />
+     * int red1 = getRed(foreground);<br />
+     * int red2 = getRed(background);<br />
+     * int green1 = getGreen(foreground);<br />
+     * int green2 = getGreen(background);<br />
+     * int blue1 = getBlue(foreground);<br />
+     * int blue2 = getBlue(background);<br />
+     * <br />
+     * double doubleAlpha = (alpha1 + alpha2 * (1 - alpha1));<br />
+     * int finalAlpha = (int) (doubleAlpha * 256);<br />
+     * <br />
+     * double cAlpha2 = alpha2 * (1 - alpha1) * 0.5;<br />
+     * <br />
+     * int finalRed = (int) (red1 * alpha1 + red2 * cAlpha2);<br />
+     * int finalGreen = (int) (green1 * alpha1 + green2 * cAlpha2);<br />
+     * int finalBlue = (int) (blue1 * alpha1 + blue2 * cAlpha2);<br />
+     * return getColor(finalAlpha, finalRed, finalGreen, finalBlue);<br /><br />
+     * </code>
      *
-     * @param color1 The color above
-     * @param color2 The color below
+     * @param foreground The foreground color (above)
+     * @param background The background color (below)
      * @return A composition of both colors, in ARGB format
      */
-    public static int composite(final int color1, final int color2) {
+    public static int composite(final int foreground, final int background) {
 
-        double alpha1 = getAlpha(color1) / 256.0;
-        double alpha2 = getAlpha(color2) / 256.0;
+        double alpha1 = (foreground >>> ALPHA_SHIFT) / 256.0;
+        double alpha2 = (background >>> ALPHA_SHIFT) / 256.0;
 
-        if (alpha1 == 1.0 || alpha2 == 0) return color1;
-        else if (alpha1 == 0) return color2;
-
-        int red1 = getRed(color1);
-        int red2 = getRed(color2);
-        int green1 = getGreen(color1);
-        int green2 = getGreen(color2);
-        int blue1 = getBlue(color1);
-        int blue2 = getBlue(color2);
-
-        double doubleAlpha = (alpha1 + alpha2 * (1 - alpha1));
-        int finalAlpha = (int) (doubleAlpha * 256);
+        if (alpha2 == 0) return foreground;
+        else if (alpha1 == 0) return background;
 
         double cAlpha2 = alpha2 * (1 - alpha1) * 0.5;
-
-        int finalRed = (int) (red1 * alpha1 + red2 * cAlpha2);
-        int finalGreen = (int) (green1 * alpha1 + green2 * cAlpha2);
-        int finalBlue = (int) (blue1 * alpha1 + blue2 * cAlpha2);
-
-        return getColor(finalAlpha, finalRed, finalGreen, finalBlue);
+        return ((int) ((alpha1 + alpha2 * (1 - alpha1)) * 256) << ALPHA_SHIFT) | ((int) (((foreground >> RED_SHIFT) & MASK) * alpha1 + ((background >> RED_SHIFT) & MASK) * cAlpha2) << RED_SHIFT) | ((int) (((foreground >> GREEN_SHIFT) & MASK) * alpha1 + ((background >> GREEN_SHIFT) & MASK) * cAlpha2) << GREEN_SHIFT) | (int) ((foreground & MASK) * alpha1 + (background & MASK) * cAlpha2);
     }
 
     /**
@@ -123,4 +134,5 @@ public class ARGBColorUtil {
     public static int getAlpha(final int color) {
         return (color >> ALPHA_SHIFT) & MASK;
     }
+
 }

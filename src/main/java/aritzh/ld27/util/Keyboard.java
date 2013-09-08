@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 /**
  * Keyboard and focus handler.
+ *
  * @author Aritz Lopez
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  */
@@ -19,6 +20,7 @@ public class Keyboard implements KeyListener, FocusListener {
     private ArrayList<Integer> checked = new ArrayList<Integer>();
 
     // region ...Listener methods...
+
     /**
      * Invoked when a component gains the keyboard focus.
      */
@@ -74,6 +76,7 @@ public class Keyboard implements KeyListener, FocusListener {
      * Checks whether the specified key was typed (pressed, but not checked if it was pressed)
      * <br />
      * Example: {@code isKeyTyped(KeyEvent.VK_F)} to check whether the key F was pressed since the last call to this method
+     *
      * @param key The key code to check.
      * @return true if the key hasn't been checked since it was last pressed, false otherwise
      * @see KeyEvent KeyEvent for the keycodes
@@ -88,16 +91,18 @@ public class Keyboard implements KeyListener, FocusListener {
 
     /**
      * Returns true if the key is currently pressed
+     *
      * @param key The key code
      * @return true if the key is currently pressed
      * @see KeyEvent KeyEvent for the keycodes
      */
-    public boolean isKeyDown(int key){
+    public boolean isKeyDown(int key) {
         return this.keys[key];
     }
 
     /**
      * Whether {@link KeyEvent#VK_UP} or {@link KeyEvent#VK_KP_UP} or {@link KeyEvent#VK_W} are currently pressed
+     *
      * @return true if any up-meaning key are pressed
      */
     public boolean isUp() {
@@ -106,6 +111,7 @@ public class Keyboard implements KeyListener, FocusListener {
 
     /**
      * Whether {@link KeyEvent#VK_DOWN} or {@link KeyEvent#VK_KP_DOWN} or {@link KeyEvent#VK_S} are currently pressed
+     *
      * @return true if any down-meaning key are pressed
      */
     public boolean isDown() {
@@ -114,6 +120,7 @@ public class Keyboard implements KeyListener, FocusListener {
 
     /**
      * Whether {@link KeyEvent#VK_LEFT} or {@link KeyEvent#VK_KP_LEFT} or {@link KeyEvent#VK_A} are currently pressed
+     *
      * @return true if any left-meaning key are pressed
      */
     public boolean isLeft() {
@@ -122,6 +129,7 @@ public class Keyboard implements KeyListener, FocusListener {
 
     /**
      * Whether {@link KeyEvent#VK_RIGHT} or {@link KeyEvent#VK_KP_RIGHT} or {@link KeyEvent#VK_D} are currently pressed
+     *
      * @return true if any right-meaning key are pressed
      */
     public boolean isRight() {
@@ -130,6 +138,7 @@ public class Keyboard implements KeyListener, FocusListener {
 
     /**
      * True if the window this was registered to has currently focus
+     *
      * @return true if the window has focus
      */
     public boolean hasFocus() {
@@ -145,6 +154,7 @@ public class Keyboard implements KeyListener, FocusListener {
 
     /**
      * Resets a specific key. For later use with {@link Keyboard#isKeyTyped(int)}
+     *
      * @param keyCode The key code to reset
      * @see aritzh.ld27.util.Keyboard#resetChecked()
      * @see KeyEvent KeyEvent for the keycodes
