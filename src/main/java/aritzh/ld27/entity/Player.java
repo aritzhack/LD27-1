@@ -2,6 +2,7 @@ package aritzh.ld27.entity;
 
 import aritzh.ld27.level.Level;
 import aritzh.ld27.render.Sprite;
+import aritzh.ld27.render.SpriteSheet;
 import aritzh.ld27.util.Keyboard;
 
 import java.awt.Rectangle;
@@ -15,7 +16,7 @@ import java.awt.Rectangle;
 public class Player extends Mob {
 
     private static final int WIDTH = 16, HEIGHT = 31;
-    private static final Sprite SPRITE = new Sprite(2, 1, WIDTH, HEIGHT);
+    private static final Sprite SPRITE = SpriteSheet.SHEET.getSprite(2, 1, WIDTH, HEIGHT);
     private Keyboard input;
 
     /**
