@@ -153,7 +153,7 @@ public class Game extends Canvas implements Runnable {
         g.start();
     }
 
-    protected synchronized void start() {
+    public synchronized void start() {
         this.running = true;
         this.thread = new Thread(this, "Main Game Thread");
         this.thread.start();
@@ -235,7 +235,6 @@ public class Game extends Canvas implements Runnable {
             g.setFont(this.font32);
 
             // Clear
-            g.clearRect(0, 0, this.getWidth(), this.getHeight());
             g.setColor(Color.black);
             g.fillRect(0, 0, this.getWidth(), this.getHeight());
             this.currRender.clear();

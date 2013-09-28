@@ -56,7 +56,7 @@ public abstract class Mob extends Entity {
      * @param velX The new horizontal velocity
      */
     public void setVelX(int velX) {
-        this.velX = velX;
+        this.velX = Integer.signum(velX);
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class Mob extends Entity {
      * @param velY The new vertical velocity
      */
     public void setVelY(int velY) {
-        this.velY = velY;
+        this.velY = Integer.signum(velY);
     }
 
     /**

@@ -11,10 +11,8 @@ public class ToPlayerStupidAI implements IAI {
     @Override
     public void apply(Mob m) {
         Player p = m.getLevel().getPlayer();
-        int vX = m.getPosX() < p.getPosX() ? 1 : -1;
-        int vY = m.getPosY() < p.getPosY() ? 1 : -1;
 
-        m.setVelX(vX);
-        m.setVelY(vY);
+        m.setVelX(p.getPosX() - m.getPosX());
+        m.setVelY(p.getPosY() - m.getPosY());
     }
 }

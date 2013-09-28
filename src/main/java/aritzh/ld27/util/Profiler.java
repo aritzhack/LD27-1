@@ -85,7 +85,7 @@ public class Profiler {
         section = section.toLowerCase();
 
         if (this.startTime.containsKey(section))
-            throw new IllegalArgumentException("Section \"" + section + "\" was been started!");
+            throw new IllegalArgumentException("Section \"" + section + "\" had already been started!");
 
         this.startTime.put(section, System.nanoTime());
         this.trace.push(section);

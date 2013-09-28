@@ -122,12 +122,11 @@ public class Node implements Comparable<Node> {
         Node node = (Node) o;
 
         return this.solid == node.solid && this.x == node.x && this.y == node.y;
-
     }
 
     @Override
     public String toString() {
-        return (this.solid ? "XX" : "  ");
+        return "(" + this.x + ", " + this.y + ")" + (this.solid?" S":"");
     }
 
     public void setMap(NodeMap map) {

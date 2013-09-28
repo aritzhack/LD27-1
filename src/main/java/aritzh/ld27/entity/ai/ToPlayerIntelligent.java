@@ -22,8 +22,6 @@ public class ToPlayerIntelligent implements IAI {
     Point me, p;
     Player player;
 
-    NodeMap map;
-
     @Override
     public void apply(Mob m) {
         Profiler.getInstance().startSection("A* AI");
@@ -33,13 +31,19 @@ public class ToPlayerIntelligent implements IAI {
             this.player = this.level.getPlayer();
             this.p = this.level.getTile(this.player);
 
-            if (this.p.equals(this.me)) {
-                m.setVelX(Integer.signum(this.player.getPosX() - m.getPosX()));
-                m.setVelY(Integer.signum(this.player.getPosY() - m.getPosY()));
-            } else if (this.calculatePath() != null && this.path.size() >= 2) {
+            if (this.calculatePath() == null) {
+//                IAI.TO_PLAYER_STUPID.apply(m);
+//                m.getLevel().getGame().setAIMode(false);
+            } else {
                 Node next = this.path.get(1);
-                m.setVelX(Integer.signum((int) (((next.getX() + .5) * SpriteSheet.SPRITE_SIZE) - m.getPosX() - m.getSprite().getWidth() / 2)));
-                m.setVelY(Integer.signum((int) (((next.getY() + .5) * SpriteSheet.SPRITE_SIZE) - m.getPosY() - m.getSprite().getHeight() / 2)));
+
+                final double targetX = (next.getX() + .5) * SpriteSheet.SPRITE_SIZE;
+                final double targetY = (next.getY() + .5) * SpriteSheet.SPRITE_SIZE;
+
+                System.out.println("Center of target node: (" + targetX + ", " + targetY + ")");
+
+                m.setVelX((int) (targetX - m.getPosX() - m.getSprite().getWidth() / 2));
+                m.setVelY((int) (targetY - m.getPosY() - m.getSprite().getHeight() / 2));
             }
         } catch (Throwable e) {
             e.printStackTrace();
@@ -50,9 +54,8 @@ public class ToPlayerIntelligent implements IAI {
     }
 
     private List<Node> calculatePath() {
-        if (this.map == null)
-            this.map = new NodeMap(this.level.getNodes(), this.me.x, this.me.y, this.p.x, this.p.y, true);
-        else this.map.update(this.level.getNodes(), this.me.x, this.me.y, this.p.x, this.p.y);
-        return this.path = this.map.calculatePath();
+//        if (this.map == null)
+//        else this.map.update(this.level.getNodes(), this.me.x, this.me.y, this.p.x, this.p.y);
+        return this.path = new NodeMap(this.level.getNodes(), this.me.x, this.me.y, this.p.x, this.p.y, true).calculatePath();
     }
 }
