@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+    <option name="CUSTOM_SCOPE_NAME" value="AStar" />
+    <option name="ANALYSIS_IN_BACKGROUND" value="true" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/AlienEnemy.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/AlienEnemy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/Game.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/Game.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Mob.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Mob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/Node.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/Node.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/util/Profiler.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/util/Profiler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerIntelligent.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerIntelligent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerStupidAI.java" afterPath="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerStupidAI.java" />
+    </list>
+    <ignored path="LateLD27.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="/Game.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398872824" ignored="false" />
+    <file path="/fragment.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396207855" ignored="false" />
+    <file path="/Timer.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377601007627" ignored="false" />
+    <file path="/a.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378661531654" ignored="false" />
+    <file path="/Profiler.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378658751162" ignored="false" />
+    <file path="/Dummy.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380395897599" ignored="false" />
+    <file path="/Applet.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377869363456" ignored="false" />
+    <file path="/Render.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398384667" ignored="false" />
+    <file path="/Keyboard.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377866872926" ignored="false" />
+    <file path="/Sprite.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378587912964" ignored="false" />
+    <file path="/SpriteSheet.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378588653238" ignored="false" />
+    <file path="/Util.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377690573429" ignored="false" />
+    <file path="/sample.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378063602038" ignored="false" />
+    <file path="/Player.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378658721594" ignored="false" />
+    <file path="/Mob.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379164842999" ignored="false" />
+    <file path="/Entity.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378656059356" ignored="false" />
+    <file path="/Tile.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429633870" ignored="false" />
+    <file path="/Level.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429621406" ignored="false" />
+    <file path="/a.dummy" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377855395250" ignored="false" />
+    <file path="/ColorUtil.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377869329231" ignored="false" />
+    <file path="$PROJECT_DIR$/../IDEA Plugin Test/src/Main.groovy" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377875404610" ignored="false" />
+    <file path="$PROJECT_DIR$/../IDEA Plugin Test/META-INF/plugin.xml" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377875407550" ignored="false" />
+    <file path="$PROJECT_DIR$/../IDEA Plugin Test/.idea/misc.xml" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377875423422" ignored="false" />
+    <file path="$PROJECT_DIR$/../IDEA Plugin Test/.idea/workspace.xml" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377875423422" ignored="false" />
+    <file path="/Enemy.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377950943652" ignored="false" />
+    <file path="/BoxEnemy.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1377952745877" ignored="false" />
+    <file path="/Console.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378030798037" ignored="false" />
+    <file path="/a.scala" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378033896052" ignored="false" />
+    <file path="$PROJECT_DIR$/../../Scala/TestScala/pom.xml" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378034255233" ignored="false" />
+    <file path="/AlienEnemy.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378588725186" ignored="false" />
+    <file path="/IAI.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378300050049" ignored="false" />
+    <file path="/RandomMovementAI.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378116151753" ignored="false" />
+    <file path="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/To.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378117137624" ignored="false" />
+    <file path="/ToPlayeraI.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378117403523" ignored="false" />
+    <file path="/ToPlayerAI.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378117277842" ignored="false" />
+    <file path="/AStar.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378209833288" ignored="false" />
+    <file path="/Deap.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378118426742" ignored="false" />
+    <file path="/NodoAstar.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378118405623" ignored="false" />
+    <file path="/AStarNode.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378119577263" ignored="false" />
+    <file path="/INodeMap.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378119351425" ignored="false" />
+    <file path="/ToPlayerIntelligent.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379165243411" ignored="false" />
+    <file path="/Node.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379163841839" ignored="false" />
+    <file path="/AStarHeuristic.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378124951052" ignored="false" />
+    <file path="/Path.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378125577959" ignored="false" />
+    <file path="/AreaMap.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378128156115" ignored="false" />
+    <file path="/TestAStar.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378304964096" ignored="false" />
+    <file path="/NodeMap.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379156567820" ignored="false" />
+    <file path="/NewRender.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378657465398" ignored="false" />
+    <file path="/ARGBColorUtil.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378660774361" ignored="false" />
+    <file path="/IRender.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380397203891" ignored="false" />
+    <file path="/TimeTest.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378659895443" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/1/PROGRESS.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378745185618" ignored="false" />
+    <file path="/PROGRESS.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378745072500" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/TODOs.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429957947" ignored="false" />
+    <file path="/Scores.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378745406194" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/Scores.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379960024612" ignored="false" />
+    <file path="/Groovy Console" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824032622" ignored="false" />
+    <file path="/Java REPL" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378823925563" ignored="false" />
+    <file path="$PROJECT_DIR$/../Minicraft/src/com/mojang/ld22/Game.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824171605" ignored="false" />
+    <file path="/AirWizard.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824212599" ignored="false" />
+    <file path="$PROJECT_DIR$/../Minicraft/src/com/mojang/ld22/entity/AirWizard.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824237878" ignored="false" />
+    <file path="/TODOs.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824357558" ignored="false" />
+    <file path="$PROJECT_DIR$/../Minicraft/src/com/mojang/ld22/entity/Zombie.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824632485" ignored="false" />
+    <file path="$PROJECT_DIR$/../Minicraft/src/com/mojang/ld22/entity/Slime.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1378824641061" ignored="false" />
+    <file path="/ToPlayerStupidAI.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379163625377" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/4/src/main/java/aritzh/enginePerDay/four/level/Level.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429622619" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/4/src/main/java/aritzh/enginePerDay/four/level/Tile.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429640164" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/4/src/main/java/aritzh/enginePerDay/four/Game.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429943230" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/4/src/main/java/aritzh/enginePerDay/four/input/Keyboard.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429913072" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/3/DONE.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429966491" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/2/DONE.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429972058" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/1/DONE.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379429976986" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/5/src/main/java/aritzh/enginePerDay/five/GameApplet.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379516387985" ignored="false" />
+    <file path="/GameApplet.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379516267411" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/5/src/main/java/aritzh/enginePerDay/five/Game.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379516250306" ignored="false" />
+    <file path="$PROJECT_DIR$/../EningePerDay/5/DONE.txt" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1379516549715" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/Game.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380395954911" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/render/Sprite.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380395996401" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/render/Render.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380395996401" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/render/IRender.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380395996401" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/render/SpriteSheet.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380395996401" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/Game.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398894151" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/render/Sprite.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396013561" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/render/Render.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398413819" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/render/IRender.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380397319073" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/render/SpriteSheet.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396013561" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/ICommand.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/FormatHelper.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/NoRenderCommand.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/Console.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398760370" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/AbstractCommand.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/Keyboard.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/NoClipCommand.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/HelpCommand.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/Profiler.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/ARGBColorUtil.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/util/console/commands/GodModeCommand.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380396040868" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/ILevel.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398588234" ignored="false" />
+    <file path="/ILevel.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398587045" ignored="false" />
+    <file path="$PROJECT_DIR$/../TIME/src/main/java/aritzh/time/IPlayer.java" changelist="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" time="1380398518421" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/LateLD27$Game.coverage" NAME="Game Coverage Results" MODIFIED="1377862321609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <exception_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="true" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <filter>
+          <option name="PATTERN" value="aritzh.ld27.*" />
+          <option name="ENABLED" value="true" />
+        </filter>
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="true" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <filter>
+          <option name="PATTERN" value="aritzh.ld27.*" />
+          <option name="ENABLED" value="true" />
+        </filter>
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
+    </breakpoint_any>
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="LateLD27" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ToPlayerIntelligent.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerIntelligent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="49" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AlienEnemy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/AlienEnemy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Level.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/level/Level.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="73" column="64" selection-start="2490" selection-end="2490" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameApplet.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/GameApplet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="36" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mob.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Mob.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="76" column="40" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="18" selection-start="2273" selection-end="2273" vertical-scroll-proportion="0.59371364">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IAI.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/IAI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="59" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ToPlayerStupidAI.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerStupidAI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="36" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NodeMap.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/NodeMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="113" column="31" selection-start="3944" selection-end="3944" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="128" column="71" selection-start="4163" selection-end="4163" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Entity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/level/Level.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Player.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/TimeTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/render/NewRender.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/util/ARGBColorUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/render/IRender.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/util/Profiler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/render/Render.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/NodeMap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/Node.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Mob.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerStupidAI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerIntelligent.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/AlienEnemy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aritzh/ld27/Game.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="A Slick2d game" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="A Slick2d game" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Plugins" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="assembly" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="A Slick2d game" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="AStar" pattern="src:aritzh.ld27.entity.ai.astar.*&amp;&amp;!src:*..*||src:aritzh.ld27.entity.ai.astar..*" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+          <State>
+            <id>ActionScript specificJavaScript</id>
+          </State>
+          <State>
+            <id>Android</id>
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Annotations verifyingGroovy</id>
+          </State>
+          <State>
+            <id>Ant inspections</id>
+          </State>
+          <State>
+            <id>Application Server Specific Inspections</id>
+          </State>
+          <State>
+            <id>Assignment issues</id>
+          </State>
+          <State>
+            <id>Assignment issuesGroovy</id>
+          </State>
+          <State>
+            <id>Assignment issuesJavaScript</id>
+          </State>
+          <State>
+            <id>BPMN 2.0 configuration errors</id>
+          </State>
+          <State>
+            <id>Bitwise operation issues</id>
+          </State>
+          <State>
+            <id>Bitwise operation issuesJavaScript</id>
+          </State>
+          <State>
+            <id>CDI(Contexts and Dependency Injection) issues</id>
+          </State>
+          <State>
+            <id>CFML</id>
+          </State>
+          <State>
+            <id>CSS</id>
+          </State>
+          <State>
+            <id>Class metrics</id>
+          </State>
+          <State>
+            <id>Class structure</id>
+          </State>
+          <State>
+            <id>Cloning issues</id>
+          </State>
+          <State>
+            <id>Code maturity issues</id>
+          </State>
+          <State>
+            <id>Code quality toolsJavaScript</id>
+          </State>
+          <State>
+            <id>Code style issues</id>
+          </State>
+          <State>
+            <id>Code style issuesJavaScript</id>
+          </State>
+          <State>
+            <id>CoffeeScript</id>
+          </State>
+          <State>
+            <id>Compiler issues</id>
+          </State>
+          <State>
+            <id>Concurrency annotation issues</id>
+          </State>
+          <State>
+            <id>Control FlowGroovy</id>
+          </State>
+          <State>
+            <id>Control flow issues</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Data flow issues</id>
+          </State>
+          <State>
+            <id>Data flow issuesGroovy</id>
+          </State>
+          <State>
+            <id>Data flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Declaration redundancy</id>
+          </State>
+          <State>
+            <id>Declaration redundancyGroovy</id>
+          </State>
+          <State>
+            <id>DeclarationGroovy</id>
+          </State>
+          <State>
+            <id>Dependency issues</id>
+          </State>
+          <State>
+            <id>Encapsulation issues</id>
+          </State>
+          <State>
+            <id>Error handling</id>
+          </State>
+          <State>
+            <id>Error handlingGroovy</id>
+          </State>
+          <State>
+            <id>Error handlingJavaScript</id>
+          </State>
+          <State>
+            <id>Facelet format detection</id>
+          </State>
+          <State>
+            <id>Faces Model</id>
+          </State>
+          <State>
+            <id>Finalization issues</id>
+          </State>
+          <State>
+            <id>FlexUnit inspections</id>
+          </State>
+          <State>
+            <id>GPath inspectionsGroovy</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>GeneralCoffeeScript</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Google App Engine</id>
+          </State>
+          <State>
+            <id>Google Web Toolkit issues</id>
+          </State>
+          <State>
+            <id>Groovy</id>
+          </State>
+          <State>
+            <id>Guice Inspections</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
+            <id>Hibernate Issues</id>
+          </State>
+          <State>
+            <id>Imports</id>
+          </State>
+          <State>
+            <id>Inheritance issues</id>
+          </State>
+          <State>
+            <id>Initialization issues</id>
+          </State>
+          <State>
+            <id>Internationalization issues</id>
+          </State>
+          <State>
+            <id>J2ME Plugin</id>
+          </State>
+          <State>
+            <id>J2ME issues</id>
+          </State>
+          <State>
+            <id>JPA issues</id>
+          </State>
+          <State>
+            <id>JSF annotated elements errors</id>
+          </State>
+          <State>
+            <id>JSP Inspections</id>
+          </State>
+          <State>
+            <id>JUnit issues</id>
+          </State>
+          <State>
+            <id>Java EE issues</id>
+          </State>
+          <State>
+            <id>Java language level issues</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>JavaBeans issues</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript function metricsJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript validity issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Javadoc issues</id>
+          </State>
+          <State>
+            <id>Jpdl Model</id>
+          </State>
+          <State>
+            <id>LESS</id>
+          </State>
+          <State>
+            <id>Language Injection</id>
+          </State>
+          <State>
+            <id>Logging issues</id>
+          </State>
+          <State>
+            <id>Maven</id>
+          </State>
+          <State>
+            <id>Memory issues</id>
+          </State>
+          <State>
+            <id>Method MetricsGroovy</id>
+          </State>
+          <State>
+            <id>Method metrics</id>
+          </State>
+          <State>
+            <id>Modularization issues</id>
+          </State>
+          <State>
+            <id>Naming ConventionsGroovy</id>
+          </State>
+          <State>
+            <id>Naming conventions</id>
+          </State>
+          <State>
+            <id>Naming conventionsJavaScript</id>
+          </State>
+          <State>
+            <id>Numeric issues</id>
+          </State>
+          <State>
+            <id>OSGi</id>
+          </State>
+          <State>
+            <id>Packaging issues</id>
+          </State>
+          <State>
+            <id>Pattern Validation</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+          <State>
+            <id>Play</id>
+          </State>
+          <State>
+            <id>Plugin DevKit</id>
+          </State>
+          <State>
+            <id>Portability issues</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsGroovy</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsJavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugs</id>
+          </State>
+          <State>
+            <id>Probable bugsCoffeeScript</id>
+          </State>
+          <State>
+            <id>Probable bugsGroovy</id>
+          </State>
+          <State>
+            <id>Probable bugsJavaScript</id>
+          </State>
+          <State>
+            <id>Properties Files</id>
+          </State>
+          <State>
+            <id>RELAX NG</id>
+          </State>
+          <State>
+            <id>Resource management issues</id>
+          </State>
+          <State>
+            <id>SASS/SCSS</id>
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+          <State>
+            <id>Security issues</id>
+          </State>
+          <State>
+            <id>Serialization issues</id>
+          </State>
+          <State>
+            <id>Spelling</id>
+          </State>
+          <State>
+            <id>Spring MVCSpring Model</id>
+          </State>
+          <State>
+            <id>Spring Model</id>
+          </State>
+          <State>
+            <id>Struts</id>
+          </State>
+          <State>
+            <id>Struts 1Struts</id>
+          </State>
+          <State>
+            <id>Struts 2Struts</id>
+          </State>
+          <State>
+            <id>StyleGroovy</id>
+          </State>
+          <State>
+            <id>TestNG</id>
+          </State>
+          <State>
+            <id>Threading issues</id>
+          </State>
+          <State>
+            <id>Threading issuesGroovy</id>
+          </State>
+          <State>
+            <id>UI Form Problems</id>
+          </State>
+          <State>
+            <id>Validity issuesGroovy</id>
+          </State>
+          <State>
+            <id>Velocity inspections</id>
+          </State>
+          <State>
+            <id>Verbose or redundant code constructs</id>
+          </State>
+          <State>
+            <id>Visibility issues</id>
+          </State>
+          <State>
+            <id>WSDL issues</id>
+          </State>
+          <State>
+            <id>Web Services</id>
+          </State>
+          <State>
+            <id>XML</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+          <State>
+            <id>XSLT</id>
+          </State>
+          <State>
+            <id>toString() issues</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>UnqualifiedFieldAccess</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <OptionsSetting value="true" id="Undo Check Out" />
+    <OptionsSetting value="true" id="Get Latest Version" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ld27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LateLD27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ld27" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="level" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="275" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="292" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="296" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="299" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="978" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="971" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="292" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="285" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="aritzh.ld27.entity.ai.astar" />
+      <recent name="aritzh.ld27.entity.ai" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Game">
+    <configuration default="false" name="TimeTest" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="aritzh.ld27.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="aritzh.ld27.TimeTest" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="LateLD27" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="Game Applet" type="Applet" factoryName="Applet">
+      <module name="LateLD27" />
+      <option name="MAIN_CLASS_NAME" value="aritzh.ld27.GameApplet" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="800" />
+      <option name="HEIGHT" value="600" />
+      <option name="POLICY_FILE" value="file://$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Game" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="aritzh.ld27.Game" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="LateLD27" />
+      <envs />
+      <RunnerSettings RunnerId="Cover" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Debug with VisualVM">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JProfiler">
+        <option name="WINDOW" value="false" />
+        <option name="JVMPI" value="false" />
+        <option name="INTERPRETED" value="false" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <RunnerSettings RunnerId="Run with VisualVM" />
+      <ConfigurationWrapper RunnerId="Cover" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Debug with VisualVM" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run with VisualVM" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestAStar" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="aritzh.ld27.entity.ai.astar.TestAStar" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="LateLD27" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Debug with VisualVM">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JProfiler">
+        <option name="WINDOW" value="false" />
+        <option name="JVMPI" value="false" />
+        <option name="INTERPRETED" value="false" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <RunnerSettings RunnerId="Run with VisualVM" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Debug with VisualVM" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run with VisualVM" />
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Applet.Game Applet" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Game" />
+      <item index="2" class="java.lang.String" itemvalue="Application.TestAStar" />
+      <item index="3" class="java.lang.String" itemvalue="Application.TimeTest" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.TimeTest" />
+      </list>
+    </recent_temporary>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9cffe0c-51ff-4ed8-a047-0304c1e610b8" name="Default" comment="" />
+      <created>1377598270352</created>
+      <updated>1377598270352</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Fixed profiling, and improved exiting the game">
+      <created>1377610658234</created>
+      <updated>1377610658234</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27171493" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.52783966" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45666668" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32293987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32444444" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6859688" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.688196" sideWeight="0.56235826" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850778" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18516542" sideWeight="0.54342985" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45657015" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="117" y="137" width="745" height="268" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5701559" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24924242" sideWeight="0.64922047" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850778" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.52004457" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997773" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="UPDATE_FILTER_SCOPE_NAME" />
+    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
+    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed profiling, and improved exiting the game" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Fixed profiling, and improved exiting the game" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="23" selection-start="495" selection-end="500" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/TimeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="43" selection-start="654" selection-end="654" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/util/ARGBColorUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="7" selection-start="2713" selection-end="2713" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/util/Profiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="48" selection-start="2940" selection-end="2940" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/render/Render.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="35" selection-start="2616" selection-end="2616" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/level/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="237" selection-end="237" vertical-scroll-proportion="0.042713568" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/IAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="59" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="71" selection-start="4163" selection-end="4163" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/astar/NodeMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="31" selection-start="3944" selection-end="3944" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/Mob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="40" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerStupidAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="36" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/level/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="64" selection-start="2490" selection-end="2490" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/GameApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="36" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/ai/ToPlayerIntelligent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="49" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/entity/AlienEnemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aritzh/ld27/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="18" selection-start="2273" selection-end="2273" vertical-scroll-proportion="0.59371364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>scala-compiler</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Android 4.2.2 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>LateLD27</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>AStar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="AStar" />
+          </order>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
+
