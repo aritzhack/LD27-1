@@ -2,5 +2,7 @@
 *.jar
 *.war
 *.ear
+.idea/workspace.xml
+*.iws
 target/
 src/main/java/aritzh/ld27/TimeTest.java
