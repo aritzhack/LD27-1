@@ -126,7 +126,7 @@ public class Node implements Comparable<Node> {
 
     @Override
     public String toString() {
-        return "(" + this.x + ", " + this.y + ")" + (this.solid?" S":"");
+        return "(" + this.x + ", " + this.y + ")" + (this.solid ? " S" : "");
     }
 
     public void setMap(NodeMap map) {

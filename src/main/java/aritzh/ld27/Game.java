@@ -191,6 +191,7 @@ public class Game extends Canvas implements Runnable {
                 delta--;
                 this.updates++;
             }
+            if(delta > 3) delta = 1;
             this.render();
 
             this.frames++;
